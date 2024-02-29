@@ -32,6 +32,7 @@ function _update()
 
     if ctrl.pressed(keys.space) then
         c.paused = not c.paused
+        sfx.play(0)
     end
 
    
@@ -54,10 +55,13 @@ function _update()
 end
 
 function _draw()
-    spr.sheet(2)
-    spr.sdraw()
-    shape.circlef(c.x, c.y, c.r, 0) -- draw transparent circle
-    gfx.to_sheet(2)
+    if c.r > 0 then
+        
+        spr.sheet(2)
+        spr.sdraw()
+        shape.circlef(c.x, c.y, c.r, 0) -- draw transparent circle
+        gfx.to_sheet(2)
+    end
 
     gfx.cls()
     spr.sheet((c.cycle + 1) % 2)
