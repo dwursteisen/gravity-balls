@@ -1,1 +1,1 @@
-{"version":"V1","name":"Abechronome","resolution":{"width":256,"height":144},"sprites":{"width":16,"height":16},"zoom":3,"colors":["#000000","#FFFFFF"],"scripts":["game.lua"]}
+{"version":"V1","name":"Abechronome","resolution":{"width":256,"height":144},"sprites":{"width":16,"height":16},"zoom":3,"colors":["#150413","#635C6D","#FFFFD1","#FF004D"],"scripts":["game.lua"],"spritesheets":["miniature.png","miniature_inv.png"]}
