@@ -29,11 +29,16 @@ local Portal = {
     }}
 }
 
+local player = {
+    x = 64,
+    y = 64,
+}
+
 --
 function _init()
     spr.sheet(1)
     spr.sdraw()
-    gfx.to_sheet(2) -- backup the sheet
+    gfx.to_sheet(10) -- backup the sheet
 
     c = new(Circle)
 
@@ -43,7 +48,7 @@ end
 function restart()
     spr.sheet(c.cycle)
     spr.sdraw()
-    gfx.to_sheet(2) -- backup the sheet
+    gfx.to_sheet(10) -- backup the sheet
 
     c = new(Circle)
 end
@@ -82,15 +87,15 @@ function _update()
     end
 
     if ctrl.pressing(keys.left) then
-        portal.x = portal.x - 1
+        player.x = player.x - 1
     elseif ctrl.pressing(keys.right) then
-        portal.x = portal.x + 1
+        player.x = player.x + 1
     end
 
     if ctrl.pressing(keys.up) then
-        portal.y = portal.y - 1
+        player.y = player.y - 1
     elseif ctrl.pressing(keys.down) then
-        portal.y = portal.y + 1
+        player.y = player.y + 1
     end
 end
 
@@ -100,6 +105,8 @@ function _draw()
     spr.sheet(1)
     spr.sdraw()
     map.draw()
+    spr.sheet(3)
+    spr.draw(1, player.x, player.y)
     shape.circlef(c.x, c.y, c.r, 0) -- draw transparent circle
 
     -- draw portal
@@ -121,14 +128,18 @@ function _draw()
     end
     shape.circlef(portal.x, portal.y, portal.r + math.cos(tiny.t * 5) * 2, 0)
 
-    gfx.to_sheet(2)
+    gfx.to_sheet(10)
 
     gfx.cls()
     spr.sheet((c.cycle + 1) % 2)
     spr.sdraw()
+    -- draw player
+    spr.sheet(3)
+    spr.draw(10, player.x, player.y)
+    
 
     -- draw mask
-    spr.sheet(2)
+    spr.sheet(10)
     spr.sdraw()
 
     -- shape.circle(c.x, c.y, c.r, 4)
