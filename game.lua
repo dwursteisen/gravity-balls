@@ -8,13 +8,36 @@ local Circle = {
 }
 
 local c = nil
+local portal = nil
 
+local Portal = {
+    x = 64,
+    y = 86,
+    r = 12,
+    satellites = {{
+        speed = 6,
+        dst_x = 8,
+        dst_y = 8
+    }, {
+        speed = 4,
+        dst_x = -8,
+        dst_y = 8
+    }, {
+        speed = 5,
+        dst_x = -8,
+        dst_y = -8
+    }}
+}
+
+--
 function _init()
     spr.sheet(1)
     spr.sdraw()
     gfx.to_sheet(2) -- backup the sheet
 
     c = new(Circle)
+
+    portal = new(Portal)
 end
 
 function restart()
@@ -27,7 +50,7 @@ end
 
 function _update()
     if ctrl.pressed(keys.r) then
-       restart()
+        restart()
     end
 
     if ctrl.pressed(keys.space) then
@@ -35,33 +58,70 @@ function _update()
         sfx.play(0)
     end
 
-   
     if not c.paused then
         c.frame = c.frame + 1
 
-        c.x = 256 * 0.5 
+        c.x = 256 * 0.5
         c.y = 144 * 0.5
 
         c.r = juice.circleOut(math.min(c.frame / 15, 1)) * 300 * 0.5
         if c.r >= 300 * 0.5 then
             -- hack because of the restart
             local cycle = c.cycle
-            c.cycle = (cycle + 1) % 2 
+            c.cycle = (cycle + 1) % 2
             restart()
-            c.cycle = (cycle + 1) % 2 
-        end 
-        
+            c.cycle = (cycle + 1) % 2
+        end
+
+    end
+
+    if ctrl.pressing(keys.a) then    
+        portal.r = portal.r + 1 
+    elseif ctrl.pressing(keys.z) then
+       portal.r = portal.r - 1 
+    end
+
+    if ctrl.pressing(keys.left) then
+        portal.x = portal.x - 1
+    elseif ctrl.pressing(keys.right) then
+        portal.x = portal.x + 1
+    end
+
+    if ctrl.pressing(keys.up) then
+        portal.y = portal.y - 1
+    elseif ctrl.pressing(keys.down) then
+        portal.y = portal.y + 1
     end
 end
 
 function _draw()
-    if c.r > 0 then
-        
-        spr.sheet(2)
-        spr.sdraw()
-        shape.circlef(c.x, c.y, c.r, 0) -- draw transparent circle
-        gfx.to_sheet(2)
+
+    gfx.cls()
+    spr.sheet(1)
+    spr.sdraw()
+    map.draw()
+    shape.circlef(c.x, c.y, c.r, 0) -- draw transparent circle
+
+    -- draw portal
+
+    shape.circle(portal.x, portal.y, portal.r + math.cos(tiny.t * 5) * 2 + 1, 1)
+
+    for s in all(portal.satellites) do
+        shape.circle(portal.x + math.cos(tiny.t * s.speed) * s.dst_x, portal.y + math.sin(tiny.t * s.speed) * s.dst_y,
+            5 + math.sin(tiny.t * s.speed) * 4 + 1, 1)
+
+        shape.circle(portal.x + math.cos(tiny.t * s.speed) * s.dst_x, portal.y + math.cos(tiny.t * s.speed) * s.dst_y,
+            5 + math.sin(tiny.t * s.speed) * 4 + 1, 1)
+
+        shape.circlef(portal.x + math.cos(tiny.t * s.speed) * s.dst_x, portal.y + math.cos(tiny.t * s.speed) * s.dst_y,
+            5 + math.sin(tiny.t * s.speed) * 4, 0)
+
+        shape.circlef(portal.x + math.cos(tiny.t * s.speed) * s.dst_x, portal.y + math.sin(tiny.t * s.speed) * s.dst_y,
+            5 + math.sin(tiny.t * s.speed) * 4, 0)
     end
+    shape.circlef(portal.x, portal.y, portal.r + math.cos(tiny.t * 5) * 2, 0)
+
+    gfx.to_sheet(2)
 
     gfx.cls()
     spr.sheet((c.cycle + 1) % 2)
