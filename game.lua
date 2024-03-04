@@ -1,6 +1,6 @@
 local Circle = {
-    x = 256 * 0.5,
-    y = 144 * 0.5,
+    x = 128 * 0.5,
+    y = 128 * 0.5,
     r = 0,
     frame = 0,
     paused = true,
@@ -11,6 +11,7 @@ local c = nil
 local portal = nil
 
 local Portal = {
+    active = true,
     x = 64,
     y = 86,
     r = 12,
@@ -26,8 +27,30 @@ local Portal = {
         speed = 5,
         dst_x = -8,
         dst_y = -8
-    }}
+    }},
 }
+
+Portal._draw = function(self) 
+    local portal = self
+    -- draw portal
+
+    shape.circle(portal.x, portal.y, portal.r + math.cos(tiny.t * 5) * 2 + 1, 1)
+
+    for s in all(portal.satellites) do
+        shape.circle(portal.x + math.cos(tiny.t * s.speed) * s.dst_x, portal.y + math.sin(tiny.t * s.speed) * s.dst_y,
+            5 + math.sin(tiny.t * s.speed) * 4 + 1, 1)
+
+        shape.circle(portal.x + math.cos(tiny.t * s.speed) * s.dst_x, portal.y + math.cos(tiny.t * s.speed) * s.dst_y,
+            5 + math.sin(tiny.t * s.speed) * 4 + 1, 1)
+
+        shape.circlef(portal.x + math.cos(tiny.t * s.speed) * s.dst_x, portal.y + math.cos(tiny.t * s.speed) * s.dst_y,
+            5 + math.sin(tiny.t * s.speed) * 4, 0)
+
+        shape.circlef(portal.x + math.cos(tiny.t * s.speed) * s.dst_x, portal.y + math.sin(tiny.t * s.speed) * s.dst_y,
+            5 + math.sin(tiny.t * s.speed) * 4, 0)
+    end
+    shape.circlef(portal.x, portal.y, portal.r + math.cos(tiny.t * 5) * 2, 0)
+end
 
 local player = {
     x = 64,
@@ -66,10 +89,10 @@ function _update()
     if not c.paused then
         c.frame = c.frame + 1
 
-        c.x = 256 * 0.5
-        c.y = 144 * 0.5
+        c.x = 128 * 0.5
+        c.y = 128 * 0.5
 
-        c.r = juice.circleOut(math.min(c.frame / 15, 1)) * 300 * 0.5
+        c.r = juice.circleOut(math.min(c.frame / 15, 1)) * 200 * 0.5
         if c.r >= 300 * 0.5 then
             -- hack because of the restart
             local cycle = c.cycle
@@ -100,39 +123,27 @@ function _update()
 end
 
 function _draw()
+    -- gfx.pal()
 
+    -- render visible game
     gfx.cls()
-    spr.sheet(1)
-    spr.sdraw()
+    map.level(1)
     map.draw()
-    spr.sheet(3)
-    spr.draw(1, player.x, player.y)
+    
+    portal:_draw()
     shape.circlef(c.x, c.y, c.r, 0) -- draw transparent circle
 
-    -- draw portal
-
-    shape.circle(portal.x, portal.y, portal.r + math.cos(tiny.t * 5) * 2 + 1, 1)
-
-    for s in all(portal.satellites) do
-        shape.circle(portal.x + math.cos(tiny.t * s.speed) * s.dst_x, portal.y + math.sin(tiny.t * s.speed) * s.dst_y,
-            5 + math.sin(tiny.t * s.speed) * 4 + 1, 1)
-
-        shape.circle(portal.x + math.cos(tiny.t * s.speed) * s.dst_x, portal.y + math.cos(tiny.t * s.speed) * s.dst_y,
-            5 + math.sin(tiny.t * s.speed) * 4 + 1, 1)
-
-        shape.circlef(portal.x + math.cos(tiny.t * s.speed) * s.dst_x, portal.y + math.cos(tiny.t * s.speed) * s.dst_y,
-            5 + math.sin(tiny.t * s.speed) * 4, 0)
-
-        shape.circlef(portal.x + math.cos(tiny.t * s.speed) * s.dst_x, portal.y + math.sin(tiny.t * s.speed) * s.dst_y,
-            5 + math.sin(tiny.t * s.speed) * 4, 0)
-    end
-    shape.circlef(portal.x, portal.y, portal.r + math.cos(tiny.t * 5) * 2, 0)
+    spr.sheet(3)
+    spr.draw(1, player.x, player.y)
 
     gfx.to_sheet(10)
 
-    gfx.cls()
-    spr.sheet((c.cycle + 1) % 2)
-    spr.sdraw()
+    -- render background game.
+    gfx.cls(4)
+    -- spr.sheet((c.cycle + 1) % 2)
+    map.level(0)
+    map.draw()
+    
     -- draw player
     spr.sheet(3)
     spr.draw(10, player.x, player.y)

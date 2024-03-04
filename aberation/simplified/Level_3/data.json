@@ -1,0 +1,16 @@
+{
+	"identifier": "Level_3",
+	"uniqueIdentifer": "63ff9710-d7b0-11ee-8429-27822fca8be2",
+	"x": -1,
+	"y": -1,
+	"width": 256,
+	"height": 256,
+	"bgColor": "#696A79",
+	"neighbourLevels": [],
+	"customFields" : {},
+	"layers": [
+		"Tiles2.png",
+		"Tiles.png"
+	],
+	"entities" : {}
+}

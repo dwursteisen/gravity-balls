@@ -1,21 +1,43 @@
 {
 	"identifier": "Level_1",
-	"uniqueIdentifer": "63ff9710-d7b0-11ee-8429-27822fca8be2",
-	"x": 0,
-	"y": 256,
-	"width": 256,
-	"height": 256,
+	"uniqueIdentifer": "5bc33020-d7b0-11ee-8894-fbcaff279e2e",
+	"x": -1,
+	"y": -1,
+	"width": 128,
+	"height": 128,
 	"bgColor": "#696A79",
-	"neighbourLevels": [
-		{
-			"levelIid": "94e3d340-d7b0-11ee-8429-f30005388a6c",
-			"dir": "n"
-		}
-	],
+	"neighbourLevels": [],
 	"customFields" : {},
 	"layers": [
 		"Tiles2.png",
 		"Tiles.png"
 	],
-	"entities" : {}
+	"entities": {
+		"Portal": [
+			{
+				"id": "Portal",
+				"iid": "de72e320-d7b0-11ee-8894-c95902203545",
+				"layer": "Entities",
+				"x": 32,
+				"y": 48,
+				"width": 8,
+				"height": 8,
+				"color": 6539085,
+				"customFields" : {}
+			}
+		],
+		"Exit": [
+			{
+				"id": "Exit",
+				"iid": "06138a60-d7b0-11ee-8894-d72646594493",
+				"layer": "Entities",
+				"x": 88,
+				"y": 72,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
+				"customFields" : {}
+			}
+		]
+	}
 }

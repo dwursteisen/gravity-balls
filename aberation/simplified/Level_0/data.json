@@ -1,21 +1,30 @@
 {
 	"identifier": "Level_0",
-	"uniqueIdentifer": "94e3d340-d7b0-11ee-8429-f30005388a6c",
-	"x": 0,
-	"y": 0,
-	"width": 256,
-	"height": 256,
+	"uniqueIdentifer": "e9071650-d7b0-11ee-8894-8f22f68443c4",
+	"x": -1,
+	"y": -1,
+	"width": 128,
+	"height": 128,
 	"bgColor": "#696A79",
-	"neighbourLevels": [
-		{
-			"levelIid": "63ff9710-d7b0-11ee-8429-27822fca8be2",
-			"dir": "s"
-		}
-	],
+	"neighbourLevels": [],
 	"customFields" : {},
 	"layers": [
 		"Tiles2.png",
 		"Tiles.png"
 	],
-	"entities" : {}
+	"entities": {
+		"Spawn": [
+			{
+				"id": "Spawn",
+				"iid": "fc65f890-d7b0-11ee-8894-ad3afc2a1509",
+				"layer": "Entities",
+				"x": 16,
+				"y": 40,
+				"width": 8,
+				"height": 8,
+				"color": 39387,
+				"customFields" : {}
+			}
+		]
+	}
 }
