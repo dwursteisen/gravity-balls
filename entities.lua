@@ -187,10 +187,12 @@ end
 
 Portal._update = function(self, player)
     if check_collision(self, player) then
+        local current_level = map.level()
         map.level(self.target_level)
         player.x = self.target_x
         player.y = self.target_y
-        self.on_level_change()
+        player.transition = true
+        self.on_level_change(map.level(), current_level)
     end
 end
 

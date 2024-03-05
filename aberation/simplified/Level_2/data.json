@@ -1,16 +1,41 @@
 {
 	"identifier": "Level_2",
-	"uniqueIdentifer": "94e3d340-d7b0-11ee-8429-f30005388a6c",
+	"uniqueIdentifer": "5bc33020-d7b0-11ee-8894-fbcaff279e2e",
 	"x": -1,
 	"y": -1,
-	"width": 256,
-	"height": 256,
+	"width": 128,
+	"height": 128,
 	"bgColor": "#696A79",
 	"neighbourLevels": [],
 	"customFields" : {},
 	"layers": [
-		"IntGrid.png",
-		"Tiles.png"
+		"Tiles.png",
+		"IntGrid.png"
 	],
-	"entities" : {}
+	"entities": {
+		"Collision": [
+			{
+				"id": "Collision",
+				"iid": "044aec40-d7b0-11ee-8759-7ba7e5501c2b",
+				"layer": "Entities",
+				"x": 0,
+				"y": 96,
+				"width": 88,
+				"height": 8,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "15933570-d7b0-11ee-8759-9b3b0a1291a4",
+				"layer": "Entities",
+				"x": 88,
+				"y": 0,
+				"width": 16,
+				"height": 104,
+				"color": 15389866,
+				"customFields" : {}
+			}
+		]
+	}
 }

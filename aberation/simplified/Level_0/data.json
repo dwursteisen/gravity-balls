@@ -9,8 +9,8 @@
 	"neighbourLevels": [],
 	"customFields" : {},
 	"layers": [
-		"IntGrid.png",
-		"Tiles.png"
+		"Tiles.png",
+		"IntGrid.png"
 	],
 	"entities": {
 		"Spawn": [
@@ -111,15 +111,15 @@
 				"iid": "86126980-d7b0-11ee-8759-d3f7dd44e4cc",
 				"layer": "Entities",
 				"x": 72,
-				"y": 48,
+				"y": 64,
 				"width": 8,
 				"height": 8,
 				"color": 6539085,
 				"customFields": {
 					"Exit_ref": {
-						"entityIid": "1a4f36e0-d7b0-11ee-8759-5b41b46696e0",
-						"layerIid": "bcc97c73-d7b0-11ee-8894-1f9412093df2",
-						"levelIid": "5bc33020-d7b0-11ee-8894-fbcaff279e2e",
+						"entityIid": "94da4760-d7b0-11ee-8759-ef083ccde13c",
+						"layerIid": "849eda53-d7b0-11ee-8759-c523f9ea5604",
+						"levelIid": "849eda50-d7b0-11ee-8759-cd30da54f49e",
 						"worldIid": "94e3ac31-d7b0-11ee-8429-f395ff985ff4"
 					}
 				}

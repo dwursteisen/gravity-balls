@@ -1,6 +1,6 @@
 {
 	"identifier": "Level_1",
-	"uniqueIdentifer": "5bc33020-d7b0-11ee-8894-fbcaff279e2e",
+	"uniqueIdentifer": "849eda50-d7b0-11ee-8759-cd30da54f49e",
 	"x": -1,
 	"y": -1,
 	"width": 128,
@@ -9,30 +9,85 @@
 	"neighbourLevels": [],
 	"customFields" : {},
 	"layers": [
-		"IntGrid.png",
-		"Tiles.png"
+		"Tiles.png",
+		"IntGrid.png"
 	],
 	"entities": {
 		"Collision": [
 			{
 				"id": "Collision",
-				"iid": "044aec40-d7b0-11ee-8759-7ba7e5501c2b",
+				"iid": "849eda55-d7b0-11ee-8759-0fca47af1407",
 				"layer": "Entities",
 				"x": 0,
-				"y": 96,
-				"width": 88,
+				"y": 48,
+				"width": 16,
+				"height": 32,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "849eda56-d7b0-11ee-8759-7be8b96a4127",
+				"layer": "Entities",
+				"x": 16,
+				"y": 72,
+				"width": 64,
 				"height": 8,
 				"color": 15389866,
 				"customFields" : {}
 			},
 			{
 				"id": "Collision",
-				"iid": "15933570-d7b0-11ee-8759-9b3b0a1291a4",
+				"iid": "849f0160-d7b0-11ee-8759-1bd6d3432237",
 				"layer": "Entities",
-				"x": 88,
-				"y": 0,
+				"x": 16,
+				"y": 80,
 				"width": 16,
-				"height": 104,
+				"height": 16,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "849f0161-d7b0-11ee-8759-01da8a4b2d32",
+				"layer": "Entities",
+				"x": 72,
+				"y": 80,
+				"width": 8,
+				"height": 24,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "849f0162-d7b0-11ee-8759-8b3d445279e8",
+				"layer": "Entities",
+				"x": 96,
+				"y": 72,
+				"width": 8,
+				"height": 32,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "849f0163-d7b0-11ee-8759-7d70fe618583",
+				"layer": "Entities",
+				"x": 72,
+				"y": 96,
+				"width": 32,
+				"height": 8,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "849f0164-d7b0-11ee-8759-a7e63f5355b1",
+				"layer": "Entities",
+				"x": 96,
+				"y": 72,
+				"width": 32,
+				"height": 8,
 				"color": 15389866,
 				"customFields" : {}
 			}
@@ -40,10 +95,10 @@
 		"PortalExit": [
 			{
 				"id": "PortalExit",
-				"iid": "1a4f36e0-d7b0-11ee-8759-5b41b46696e0",
+				"iid": "94da4760-d7b0-11ee-8759-ef083ccde13c",
 				"layer": "Entities",
-				"x": 40,
-				"y": 88,
+				"x": 72,
+				"y": 64,
 				"width": 8,
 				"height": 8,
 				"color": 14984818,
