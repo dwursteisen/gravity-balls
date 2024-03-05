@@ -62,7 +62,7 @@ Door._draw = function(self)
 end
 
 Door._init = function(self)
-    self.lock = {}    
+    self.lock = {}
 end
 
 local Platform = {
@@ -111,7 +111,6 @@ Platform._draw = function(self)
     shape.rectf(self.x, self.y, self.width, self.height, 1)
 end
 
-
 local Portal = {
     active = true,
     x = 64,
@@ -120,9 +119,10 @@ local Portal = {
     satellites = nil,
     target_level = 0,
     target_x = 0,
-    target_y = 0
+    target_y = 0,
+    index = 1,
+    fragment_width = 0
 }
-
 
 Portal._init = function(self)
     self.satellites = {{
@@ -142,7 +142,7 @@ Portal._init = function(self)
     self.target_level = self.customFields.Exit_ref.levelIid
 
     local current = map.level(self.target_level)
-    
+
     for e in all(map.entities["PortalExit"]) do
         if e.iid == self.customFields.Exit_ref.entityIid then
             self.target_x = e.x
@@ -150,14 +150,40 @@ Portal._init = function(self)
         end
     end
 
+    function square_size(r)
+        local diagonal = 2 * r -- Diameter of the circle
+
+        -- Calculate the width (and height) of the square
+        local width = math.sqrt(diagonal ^ 2 / 2)
+
+        return width
+    end
+
+    local cx = self.target_x + self.width * 0.5
+    local cy = self.target_y + self.height * 0.5
+    self.fragment_width = square_size(self.r) * 2 + 5
+
+    map.draw(0, 0, -- where to draw?     
+    cx - self.fragment_width * 0.5, cy - self.fragment_width * 0.5, -- from where in the max?
+    self.fragment_width, self.fragment_width -- size of the fragment
+    )
+
     map.level(current)
+
+    local cx = self.x + self.width * 0.5
+    local cy = self.y + self.height * 0.5
+
+    -- draw map next to the other map
+    map.draw(self.fragment_width, 0, cx - self.fragment_width * 0.5, cy - self.fragment_width * 0.5,
+        self.fragment_width, self.fragment_width)
+    gfx.to_sheet(self.index)
+
 end
 
 function check_collision(rect1, rect2)
     return rect1.x < rect2.x + rect2.width and rect1.x + rect1.width > rect2.x and rect1.y < rect2.y + rect2.height and
                rect1.y + rect1.height > rect2.y
 end
-
 
 Portal._update = function(self, player)
     if check_collision(self, player) then
@@ -168,9 +194,19 @@ Portal._update = function(self, player)
     end
 end
 
-Portal._draw = function(self) 
+Portal._draw = function(self)
     local portal = self
     -- draw portal
+
+    local current = spr.sheet(self.index)
+
+    local cx = self.x + self.width * 0.5
+    local cy = self.y + self.height * 0.5
+
+    -- draw current map fragment and create a hole in it
+    -- fixme: maybe useless
+    spr.sdraw(cx - self.fragment_width * 0.5, cy - self.fragment_width * 0.5, self.fragment_width, 0,
+        self.fragment_width, self.fragment_width)
 
     shape.circle(portal.x, portal.y, portal.r + math.cos(tiny.t * 5) * 2 + 1, 1)
 
@@ -188,8 +224,19 @@ Portal._draw = function(self)
             5 + math.sin(tiny.t * s.speed) * 4, 0)
     end
     shape.circlef(portal.x, portal.y, portal.r + math.cos(tiny.t * 5) * 2, 0)
-end
+    gfx.to_sheet(9) -- temporary sheet
 
+    -- draw the other level fragment
+    spr.sdraw(cx - self.fragment_width * 0.5, cy - self.fragment_width * 0.5, 
+    0, 0, 
+    self.fragment_width, self.fragment_width)
+
+    -- draw the temporary sheet
+    spr.sheet(9)
+    spr.sdraw()
+
+    spr.sheet(current)
+end
 
 local doors = {}
 local platforms = {}
@@ -200,7 +247,7 @@ local elements = {}
 
 local factory = {}
 
-factory.createDoor = function(data) 
+factory.createDoor = function(data)
     local d = new(Door, data)
     d:_init()
     table.insert(elements, d)
@@ -217,7 +264,7 @@ factory.createPlatform = function(data)
         progress = 0.5,
         duration = 3 -- 3 seconds
     })
-    
+
     p:_init()
 
     table.insert(platforms, p)
@@ -231,7 +278,9 @@ factory.createPortal = function(data, on_level_change)
 
     table.insert(portals, p)
     table.insert(elements, p)
-    
+
+    p.index = 10 + #portals
+
     p:_init()
     p.on_level_change = on_level_change
     return p

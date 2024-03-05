@@ -9,7 +9,8 @@
 	"neighbourLevels": [],
 	"customFields" : {},
 	"layers": [
-		"IntGrid.png"
+		"IntGrid.png",
+		"Tiles.png"
 	],
 	"entities": {
 		"Collision": [
@@ -41,8 +42,8 @@
 				"id": "PortalExit",
 				"iid": "1a4f36e0-d7b0-11ee-8759-5b41b46696e0",
 				"layer": "Entities",
-				"x": 24,
-				"y": 56,
+				"x": 40,
+				"y": 88,
 				"width": 8,
 				"height": 8,
 				"color": 14984818,

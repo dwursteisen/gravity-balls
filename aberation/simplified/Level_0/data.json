@@ -9,7 +9,8 @@
 	"neighbourLevels": [],
 	"customFields" : {},
 	"layers": [
-		"IntGrid.png"
+		"IntGrid.png",
+		"Tiles.png"
 	],
 	"entities": {
 		"Spawn": [
@@ -109,8 +110,8 @@
 				"id": "Portal",
 				"iid": "86126980-d7b0-11ee-8759-d3f7dd44e4cc",
 				"layer": "Entities",
-				"x": 64,
-				"y": 56,
+				"x": 72,
+				"y": 48,
 				"width": 8,
 				"height": 8,
 				"color": 6539085,
