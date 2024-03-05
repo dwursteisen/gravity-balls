@@ -9,8 +9,7 @@
 	"neighbourLevels": [],
 	"customFields" : {},
 	"layers": [
-		"Tiles2.png",
-		"Tiles.png"
+		"IntGrid.png"
 	],
 	"entities": {
 		"Portal": [
