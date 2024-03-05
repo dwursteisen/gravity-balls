@@ -111,78 +111,92 @@ Platform._draw = function(self)
     shape.rectf(self.x, self.y, self.width, self.height, 1)
 end
 
-local doors = nil
-local platforms = nil
-local player = nil
 
-local elements = nil
+local Portal = {
+    active = true,
+    x = 64,
+    y = 86,
+    r = 12,
+    satellites = nil,
+    target_level = 0,
+    target_x = 0,
+    target_y = 0
+}
 
-function _init()
-    player = new(Player, {
-        x = 150,
-        y = 10
-    })
 
-    platforms = {}
-    elements = {}
+Portal._init = function(self)
+    self.satellites = {{
+        speed = 6,
+        dst_x = 8,
+        dst_y = 8
+    }, {
+        speed = 4,
+        dst_x = -8,
+        dst_y = 8
+    }, {
+        speed = 5,
+        dst_x = -8,
+        dst_y = -8
+    }}
+
+    self.target_level = self.customFields.Exit_ref.levelIid
+
+    local current = map.level(self.target_level)
     
-    local p = new(Platform, {
-        origin_x = 0,
-        origin_y = 0,
-        target_x = 0,
-        target_y = 128,
-        progress = 0.5,
-        duration = 3 -- 3 seconds
-    })
-    
-    table.insert(platforms, p)
-    table.insert(elements, p)
-    
-    doors = {}
-
-    table.insert(doors, new(Door, {
-        id = 1,
-        gravity = {
-            x = 1,
-            y = 0
-        }
-    }))
-
-    table.insert(doors, new(Door, {
-        id = 2,
-        gravity = {
-            x = -1,
-            y = 0
-        },
-        lock = {}
-    }))
-    table.insert(doors, new(Door, {
-        id = 3,
-        gravity = {
-            x = 0,
-            y = 1
-        },
-        lock = {}
-    }))
-    table.insert(doors, new(Door, {
-        id = 4,
-        gravity = {
-            x = 0,
-            y = -1
-        },
-        lock = {}
-    }))
-
-    for d in all(doors) do
-        table.insert(elements, d)
-    end
-
-    for e in all(elements) do
-        if e._init then
-            e:_init()
+    for e in all(map.entities["PortalExit"]) do
+        if e.iid == self.customFields.Exit_ref.entityIid then
+            self.target_x = e.x
+            self.target_y = e.y
         end
     end
+
+    map.level(current)
 end
+
+function check_collision(rect1, rect2)
+    return rect1.x < rect2.x + rect2.width and rect1.x + rect1.width > rect2.x and rect1.y < rect2.y + rect2.height and
+               rect1.y + rect1.height > rect2.y
+end
+
+
+Portal._update = function(self, player)
+    if check_collision(self, player) then
+        map.level(self.target_level)
+        player.x = self.target_x
+        player.y = self.target_y
+        self.on_level_change()
+    end
+end
+
+Portal._draw = function(self) 
+    local portal = self
+    -- draw portal
+
+    shape.circle(portal.x, portal.y, portal.r + math.cos(tiny.t * 5) * 2 + 1, 1)
+
+    for s in all(portal.satellites) do
+        shape.circle(portal.x + math.cos(tiny.t * s.speed) * s.dst_x, portal.y + math.sin(tiny.t * s.speed) * s.dst_y,
+            5 + math.sin(tiny.t * s.speed) * 4 + 1, 1)
+
+        shape.circle(portal.x + math.cos(tiny.t * s.speed) * s.dst_x, portal.y + math.cos(tiny.t * s.speed) * s.dst_y,
+            5 + math.sin(tiny.t * s.speed) * 4 + 1, 1)
+
+        shape.circlef(portal.x + math.cos(tiny.t * s.speed) * s.dst_x, portal.y + math.cos(tiny.t * s.speed) * s.dst_y,
+            5 + math.sin(tiny.t * s.speed) * 4, 0)
+
+        shape.circlef(portal.x + math.cos(tiny.t * s.speed) * s.dst_x, portal.y + math.sin(tiny.t * s.speed) * s.dst_y,
+            5 + math.sin(tiny.t * s.speed) * 4, 0)
+    end
+    shape.circlef(portal.x, portal.y, portal.r + math.cos(tiny.t * 5) * 2, 0)
+end
+
+
+local doors = {}
+local platforms = {}
+local player = {}
+local portals = {}
+
+local elements = {}
 
 local factory = {}
 
@@ -212,8 +226,15 @@ factory.createPlatform = function(data)
     return p
 end
 
-factory.createPortal = function(data)
+factory.createPortal = function(data, on_level_change)
+    local p = new(Portal, data)
+
+    table.insert(portals, p)
+    table.insert(elements, p)
     
+    p:_init()
+    p.on_level_change = on_level_change
+    return p
 end
 
 return factory

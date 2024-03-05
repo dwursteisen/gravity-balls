@@ -103,6 +103,26 @@
 				"color": 15389866,
 				"customFields" : {}
 			}
+		],
+		"Portal": [
+			{
+				"id": "Portal",
+				"iid": "86126980-d7b0-11ee-8759-d3f7dd44e4cc",
+				"layer": "Entities",
+				"x": 64,
+				"y": 56,
+				"width": 8,
+				"height": 8,
+				"color": 6539085,
+				"customFields": {
+					"Exit_ref": {
+						"entityIid": "1a4f36e0-d7b0-11ee-8759-5b41b46696e0",
+						"layerIid": "bcc97c73-d7b0-11ee-8894-1f9412093df2",
+						"levelIid": "5bc33020-d7b0-11ee-8894-fbcaff279e2e",
+						"worldIid": "94e3ac31-d7b0-11ee-8429-f395ff985ff4"
+					}
+				}
+			}
 		]
 	}
 }

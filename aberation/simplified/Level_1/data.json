@@ -12,29 +12,40 @@
 		"IntGrid.png"
 	],
 	"entities": {
-		"Portal": [
+		"Collision": [
 			{
-				"id": "Portal",
-				"iid": "de72e320-d7b0-11ee-8894-c95902203545",
+				"id": "Collision",
+				"iid": "044aec40-d7b0-11ee-8759-7ba7e5501c2b",
 				"layer": "Entities",
-				"x": 32,
-				"y": 48,
-				"width": 8,
+				"x": 0,
+				"y": 96,
+				"width": 88,
 				"height": 8,
-				"color": 6539085,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "15933570-d7b0-11ee-8759-9b3b0a1291a4",
+				"layer": "Entities",
+				"x": 88,
+				"y": 0,
+				"width": 16,
+				"height": 104,
+				"color": 15389866,
 				"customFields" : {}
 			}
 		],
-		"Exit": [
+		"PortalExit": [
 			{
-				"id": "Exit",
-				"iid": "06138a60-d7b0-11ee-8894-d72646594493",
+				"id": "PortalExit",
+				"iid": "1a4f36e0-d7b0-11ee-8759-5b41b46696e0",
 				"layer": "Entities",
-				"x": 88,
-				"y": 72,
+				"x": 24,
+				"y": 56,
 				"width": 8,
 				"height": 8,
-				"color": 16711748,
+				"color": 14984818,
 				"customFields" : {}
 			}
 		]
