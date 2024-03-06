@@ -7,7 +7,9 @@ local Player = {
     y_velocity = 0,
     gravity = 0.5,
     jump_height = 100,
-    jumping = false
+    jumping = false,
+    x_dir = 1,
+    y_dir = 0,
 }
 
 Player._init = function(self)
@@ -46,10 +48,12 @@ end
 Player._update = function(self, collisions, platforms)
     local impulse_x = 0
     -- move horizontally
-    if ctrl.pressing(keys.left) then -- move lef
+    if ctrl.pressing(keys.left) then -- move left
         self.x = self.x - self.speed
+        self.x_dir = -1
     elseif ctrl.pressing(keys.right) then -- move right
         self.x = self.x + self.speed
+        self.x_dir = 1
     end
 
     -- Apply gravity
