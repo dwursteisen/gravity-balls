@@ -5,6 +5,7 @@ local Player = {
     height = 16,
     speed = 1.5,
     y_velocity = 0,
+    gravity_str = "Down",
     gravity_y = 0.5, -- actual gravity in the game
     gravity_x = 0,
     gravity_y_sign = 1, -- sign of the gravity (-1 or 1). Might be equal to 0 if no gravity

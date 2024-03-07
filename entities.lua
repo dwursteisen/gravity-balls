@@ -57,11 +57,11 @@ Door._update = function(self, player)
 end
 
 Door._draw = function(self)
-    shape.line(self.x, self.y, self.lock.x, self.lock.y, 2)
-    shape.circlef(self.x, self.y, 8, 2)
-    shape.circlef(self.lock.x, self.lock.y, 4, 3)
+    local current = spr.sheet("tiles.png")
 
-    shape.rect(self.x, self.y, self.width, self.height, 3)
+    spr.sdraw(self.x, self.y, 32, 96, self.width, self.height, true, true)
+
+    spr.sheet(current)
 end
 
 Door._init = function(self)
@@ -148,8 +148,8 @@ Platform._init = function(self)
         self.target_y = self.y + self.height
     end
 
+    self.width = 16
     self.height = 4
-    self.width = 32
 
     -- self.duration = 3
 
@@ -177,7 +177,11 @@ Platform._update = function(self, player)
 end
 
 Platform._draw = function(self)
-    shape.rectf(self.x, self.y, self.width, self.height, 1)
+    local current = spr.sheet("tiles.png")
+    local offset = 0
+    spr.sdraw(self.x, self.y, 0, 120 + 4 * offset, self.width, self.height)
+    spr.sheet(current)
+
 end
 
 local GravityBall = {
@@ -284,7 +288,6 @@ Portal._init = function(self)
     }}
 
     self.target_level = self.customFields.Exit_ref.levelIid
-
 
     for e in all(map.entities["PortalExit"]) do
         if e.iid == self.customFields.Exit_ref.entityIid then

@@ -20,21 +20,15 @@ local Circle = {
 }
 
 local background = {
-    -- gravity = left
-    [-1] = {[0] = {}, },
-    -- gravity = up / down
-    [0] = {[-1] = {
-        color = 6,
-        spr = {x = 16, y = 128}
-    }, [1] = {
-        color = 5,
-        spr = {x = 0, y = 128}
-    }},
-    -- gravity = right
-    [1] = {[0] = {
-        color = 1,
-        spr = {x = 0, y = 128}
-    }}
+   Up = {spr = {x = 16, y = 128} },
+   Down = { spr = {x = 0, y = 128}}
+}
+
+local gravity_colors = {
+    Down = 4,
+    Up = 3,
+    Left = 4,
+    Right = 4,
 }
 
 Circle._update = function(self)
@@ -88,11 +82,80 @@ Camera._update = function(self)
     gfx.camera(self.x, self.y)
 end
 
+
+local Particle = {
+    x = 0,
+    y = 0,
+    ttl = 2,
+    _draw = nil,
+    _update = nil
+}
+local particles = {
+    p = {}
+}
+
+particles.create = function(number, factory, update, draw)
+    for i = 1, number do
+        local p = new(Particle)
+        p._update = update
+        p._draw = draw
+        factory(i, p)
+        table.insert(particles.p, p)
+    end
+end
+
+particles._update = function()
+    for k, p in rpairs(particles.p) do
+        if p._update ~= nil then
+            p._update(p)
+        end
+        p.ttl = p.ttl - tiny.dt
+        if p.ttl < 0 then
+            table.remove(particles.p, k)
+        end
+    end
+end
+
+particles._draw = function()
+    for p in all(particles.p) do
+        if p._draw ~= nil then
+            p._draw(p)
+        end
+    end
+end
+
 function on_gravity_change(current_ball)
     for c in all(gravity_balls) do
         c.consumed = false
     end
     current_ball.consumed = true
+    player.gravity_str = current_ball.gravity
+
+    local draw = function(p)
+        shape.circlef(p.x, p.y, p.r, p.color)
+        shape.circle(p.x, p.y, p.r, 1)
+    end
+
+    local update = function(p)
+        p.x = p.x + p.dir_x
+        p.y = p.y + p.dir_y
+        p.r = juice.powOut2(1, 3, p.ttl / 0.4)
+    end
+
+    local create = function(index, p)
+        local angle = (45 * index - 1) * math.pi / 180
+        p.r = 3
+        p.dir_x = math.cos(angle) * 1
+        p.dir_y = math.sin(angle) * 1
+        p.x = player.x + player.width * 0.5 + p.dir_x 
+        p.y = player.y + player.height * 0.5 + p.dir_y
+        p.ttl = 0.3
+        p.color = gravity_colors[current_ball.gravity]
+        return p
+    end
+
+    particles.create(8, create, update, draw)
+
 end
 
 function load_level(new_level, previous_level)
@@ -173,17 +236,18 @@ function _update()
     else
         camera:move_to(player.x + player.width * 0.5, player.y + player.height * 0.5)
     end
+
+    particles:_update()
 end
 
 
 function _draw()
-    local config = background[player.gravity_x_sign][player.gravity_y_sign]
-    gfx.cls(config.color)
+    gfx.cls(gravity_colors[player.gravity_str])
 
+    local config = background[player.gravity_str]
     local prec = spr.sheet("tiles.png")
     for i=-16,128 + 16,16 do
         for j=-16, 128 + 16,16 do
-        
             local offset = tiny.frame * 0.2 % 16 * player.gravity_y_sign
             spr.sdraw(camera.x + i +  camera.x % 16, camera.y + offset + j + camera.y % 16, config.spr.x, config.spr.y, 16, 16)
         end
@@ -199,6 +263,8 @@ function _draw()
     for e in all(entities) do
         e:_draw()
     end
+
+    particles:_draw()
 
     if transition ~= nil then
         transition:_draw()
