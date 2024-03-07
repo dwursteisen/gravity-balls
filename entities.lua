@@ -185,6 +185,7 @@ local GravityBall = {
     r = 4,
     gravity_x = 0,
     gravity_y = 0,
+    animation = 0,
     consumed = false,
     gravity = nil,
     on_gravity_change = nil
@@ -194,6 +195,7 @@ GravityBall._init = function(self)
     if self.customFields.Gravity == "Up" then
         self.gravity_x = 0
         self.gravity_y = -1
+        self.animation = 0
     elseif self.customFields.Gravity == "Left" then
         self.gravity_x = -1
         self.gravity_y = 0
@@ -203,6 +205,7 @@ GravityBall._init = function(self)
     else -- Down
         self.gravity_x = 0
         self.gravity_y = 1
+        self.animation = 24
     end
 
     self.gravity = self.customFields.Gravity
@@ -245,6 +248,8 @@ GravityBall._draw = function(self)
     end
 
     shape.circlef(self.x, self.y, self.r, color)
+    spr.sheet("ball.png")
+    spr.draw(self.animation + (tiny.frame * 0.2) % 24, self.x - self.r, self.y - self.r)
 end
 
 local Portal = {
