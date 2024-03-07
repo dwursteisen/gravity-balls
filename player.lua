@@ -100,8 +100,31 @@ Player._update = function(self, collisions, platforms)
     end
 end
 
+local invert_h = {
+    Down = false,
+    Up = true,
+    Left = false,
+    Right = false,
+}
+
+
+local invert_v = {
+    Down = false,
+    Up = true,
+    Left = false,
+    Right = false,
+}
+
 Player._draw = function(self)
-    shape.rectf(self.x, self.y, self.width, self.height, 3)
+    local current = spr.sheet("wizard.png")
+    -- shape.rectf(self.x, self.y, self.width, self.height, 3)
+    if self.jumping then
+        spr.draw(36 + (tiny.frame * 0.2) % 4, self.x, self.y, self.x_dir ~= 1, invert_h[self.gravity_str])
+    else
+        spr.draw(19 + (tiny.frame * 0.2) % 16, self.x, self.y, self.x_dir ~= 1, invert_h[self.gravity_str])
+    end
+
+    spr.sheet(current)
 end
 
 local factory = {}

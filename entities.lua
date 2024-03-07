@@ -335,24 +335,24 @@ Portal._draw = function(self)
     local cx = self.x + self.width * 0.5
     local cy = self.y + self.height * 0.5
 
-    shape.circle(portal.x, portal.y, portal.r + math.cos(tiny.t * 5) * 2 + 1, 1)
+    shape.circle(cx, cy, portal.r + math.cos(tiny.t * 5) * 2 + 1, 1)
 
     for s in all(portal.satellites) do
-        shape.circle(portal.x + math.cos(tiny.t * s.speed) * s.dst_x, portal.y + math.sin(tiny.t * s.speed) * s.dst_y,
+        shape.circle(cx + math.cos(tiny.t * s.speed) * s.dst_x, cy + math.sin(tiny.t * s.speed) * s.dst_y,
             5 + math.sin(tiny.t * s.speed) * 4 + 1, 1)
 
-        shape.circle(portal.x + math.cos(tiny.t * s.speed) * s.dst_x, portal.y + math.cos(tiny.t * s.speed) * s.dst_y,
+        shape.circle(cx + math.cos(tiny.t * s.speed) * s.dst_x, cy + math.cos(tiny.t * s.speed) * s.dst_y,
             5 + math.sin(tiny.t * s.speed) * 4 + 1, 1)
 
-        shape.circlef(portal.x + math.cos(tiny.t * s.speed) * s.dst_x, portal.y + math.cos(tiny.t * s.speed) * s.dst_y,
+        shape.circlef(cx + math.cos(tiny.t * s.speed) * s.dst_x, cy + math.cos(tiny.t * s.speed) * s.dst_y,
             5 + math.sin(tiny.t * s.speed) * 4, 2)
 
-        shape.circlef(portal.x + math.cos(tiny.t * s.speed) * s.dst_x, portal.y + math.sin(tiny.t * s.speed) * s.dst_y,
+        shape.circlef(cx + math.cos(tiny.t * s.speed) * s.dst_x, cy + math.sin(tiny.t * s.speed) * s.dst_y,
             5 + math.sin(tiny.t * s.speed) * 4, 2)
     end
-    shape.circlef(portal.x, portal.y, portal.r + math.cos(tiny.t * 5) * 2, 2)
+    shape.circlef(cx, cy, portal.r + math.cos(tiny.t * 5) * 2, 2)
 
-    print("exit", portal.x - 6, portal.y, 4)
+    print("exit", cx - 6, cy, 4)
 end
 
 local factory = {}

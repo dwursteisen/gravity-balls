@@ -37,7 +37,7 @@ Circle._update = function(self)
     self.x = 128 * 0.5
     self.y = 128 * 0.5
 
-    self.r = juice.circleOut(math.min(self.frame / 15, 1)) * 200 * 0.5
+    self.r = juice.circleOut(math.min(self.frame / 70, 1)) * 200 * 0.5
     if self.r >= 200 * 0.5 then
         player.transition = false
         transition = nil
@@ -79,7 +79,7 @@ Camera._update = function(self)
     self.x = juice.powIn2(self.x, self.target_x, 0.4)
     self.y = juice.powIn2(self.y, self.target_y, 0.4)
 
-    gfx.camera(self.x, self.y)
+    gfx.camera(math.floor(self.x), math.floor(self.y))
 end
 
 
