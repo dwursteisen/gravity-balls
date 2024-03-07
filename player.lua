@@ -5,7 +5,10 @@ local Player = {
     height = 16,
     speed = 1.5,
     y_velocity = 0,
-    gravity = 0.5,
+    gravity_y = 0.5, -- actual gravity in the game
+    gravity_x = 0,
+    gravity_y_sign = 1, -- sign of the gravity (-1 or 1). Might be equal to 0 if no gravity
+    gravity_x_sign = 0,
     jump_height = 100,
     jumping = false,
     x_dir = 1,
@@ -46,7 +49,6 @@ function collide_and_slide(object, obstacle)
 end
 
 Player._update = function(self, collisions, platforms)
-    local impulse_x = 0
     -- move horizontally
     if ctrl.pressing(keys.left) then -- move left
         self.x = self.x - self.speed
@@ -57,13 +59,14 @@ Player._update = function(self, collisions, platforms)
     end
 
     -- Apply gravity
-    self.y_velocity = self.y_velocity + self.gravity
+    -- TODO: apply x velocity with x_gravity
+    self.y_velocity = math.clamp(-5, self.y_velocity + self.gravity_y, 5)
     self.y = self.y + self.y_velocity
 
     if ctrl.pressing(keys.space) and not self.jumping then
         self.jumping = true
-        self.y_velocity = -5
-        self.y = self.y - 1
+        self.y_velocity = -5 * self.gravity_y_sign
+        self.y = self.y - 1 * self.gravity_y_sign
     end
 
     -- update player position
@@ -75,7 +78,7 @@ Player._update = function(self, collisions, platforms)
     for c in all(collisions) do
         if check_collision(c, {
             x = self.x,
-            y = self.y + 1,
+            y = self.y + 1 * self.gravity_y_sign,
             width = self.width,
             height = self.height
         }) then
@@ -88,6 +91,9 @@ end
 
 Player._draw = function(self)
     shape.rectf(self.x, self.y, self.width, self.height, 3)
+
+    debug.log(self.gravity_y_sign)
+    debug.log(self.y_velocity)
 end
 
 local factory = {}

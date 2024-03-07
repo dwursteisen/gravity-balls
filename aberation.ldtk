@@ -11,7 +11,7 @@
 	"iid": "94e3ac30-d7b0-11ee-8429-d3dd7330a4c5",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 34,
+	"nextUid": 38,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "LinearHorizontal",
@@ -471,11 +471,11 @@
 			"doc": null,
 			"width": 8,
 			"height": 8,
-			"resizableX": false,
-			"resizableY": false,
-			"minWidth": null,
+			"resizableX": true,
+			"resizableY": true,
+			"minWidth": 8,
 			"maxWidth": null,
-			"minHeight": null,
+			"minHeight": 8,
 			"maxHeight": null,
 			"keepAspectRatio": false,
 			"tileOpacity": 1,
@@ -499,14 +499,14 @@
 				{
 					"identifier": "Gravity",
 					"doc": null,
-					"__type": "Point",
-					"uid": 15,
-					"type": "F_Point",
+					"__type": "LocalEnum.Gravity",
+					"uid": 37,
+					"type": "F_Enum(35)",
 					"isArray": false,
 					"canBeNull": false,
 					"arrayMinLength": null,
 					"arrayMaxLength": null,
-					"editorDisplayMode": "NameAndValue",
+					"editorDisplayMode": "Hidden",
 					"editorDisplayScale": 1,
 					"editorDisplayPos": "Above",
 					"editorLinkStyle": "StraightArrow",
@@ -542,8 +542,8 @@
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": null,
-			"width": 16,
-			"height": 16,
+			"width": 8,
+			"height": 8,
 			"resizableX": false,
 			"resizableY": true,
 			"minWidth": null,
@@ -639,6 +639,79 @@
 			"pivotX": 0,
 			"pivotY": 0,
 			"fieldDefs": []
+		},
+		{
+			"identifier": "GravityBall",
+			"uid": 34,
+			"tags": [],
+			"exportToToc": false,
+			"allowOutOfBounds": false,
+			"doc": null,
+			"width": 8,
+			"height": 8,
+			"resizableX": false,
+			"resizableY": false,
+			"minWidth": null,
+			"maxWidth": null,
+			"minHeight": null,
+			"maxHeight": null,
+			"keepAspectRatio": false,
+			"tileOpacity": 1,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#63C74D",
+			"renderMode": "Ellipse",
+			"showName": true,
+			"tilesetId": null,
+			"tileRenderMode": "FitInside",
+			"tileRect": null,
+			"uiTileRect": null,
+			"nineSliceBorders": [],
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0.5,
+			"pivotY": 0.5,
+			"fieldDefs": [
+				{
+					"identifier": "Gravity",
+					"doc": null,
+					"__type": "LocalEnum.Gravity",
+					"uid": 36,
+					"type": "F_Enum(35)",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "ValueOnly",
+					"editorDisplayScale": 1,
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorDisplayColor": null,
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"exportToToc": false,
+					"searchable": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefsEntityUid": null,
+					"allowedRefTags": [],
+					"tilesetUid": null
+				}
+			]
 		}
 	], "tilesets": [
 		{
@@ -685,7 +758,12 @@
 				"averageColors": "9a879a879a879a879a879a879a879a879a879a87a878a878a878a878a878a878a878a878a878a8783eb6a65aa65aa65aa659a65aa65aa65aa65a"
 			}
 		}
-	], "enums": [], "externalEnums": [], "levelFields": [] },
+	], "enums": [{ "identifier": "Gravity", "uid": 35, "values": [
+		{ "id": "Down", "tileRect": null, "color": 12470831 },
+		{ "id": "Up", "tileRect": null, "color": 14120515 },
+		{ "id": "Left", "tileRect": null, "color": 15389866 },
+		{ "id": "Right", "tileRect": null, "color": 14984818 }
+	], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }], "externalEnums": [], "levelFields": [] },
 	"levels": [
 		{
 			"identifier": "Level_0",
@@ -974,62 +1052,69 @@
 							"fieldInstances": []
 						},
 						{
-							"__identifier": "Portal",
+							"__identifier": "GravityBall",
 							"__grid": [7,8],
-							"__pivot": [0,0],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#63C74D",
-							"iid": "86126980-d7b0-11ee-8759-d3f7dd44e4cc",
+							"iid": "61674d50-d7b0-11ee-8715-f3ea482d31a1",
 							"width": 8,
 							"height": 8,
-							"defUid": 10,
+							"defUid": 34,
 							"px": [56,64],
-							"fieldInstances": [{ "__identifier": "Exit_ref", "__type": "EntityRef", "__value": {
-								"entityIid": "94da4760-d7b0-11ee-8759-ef083ccde13c",
-								"layerIid": "849eda53-d7b0-11ee-8759-c523f9ea5604",
-								"levelIid": "849eda50-d7b0-11ee-8759-cd30da54f49e",
-								"worldIid": "94e3ac31-d7b0-11ee-8429-f395ff985ff4"
-							}, "__tile": null, "defUid": 26, "realEditorValues": [{
+							"fieldInstances": [{ "__identifier": "Gravity", "__type": "LocalEnum.Gravity", "__value": "Up", "__tile": null, "defUid": 36, "realEditorValues": [{
 								"id": "V_String",
-								"params": ["94da4760-d7b0-11ee-8759-ef083ccde13c"]
+								"params": ["Up"]
 							}] }]
 						},
 						{
-							"__identifier": "Portal",
-							"__grid": [12,8],
+							"__identifier": "Collision",
+							"__grid": [2,0],
 							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#EAD4AA",
+							"iid": "a31dcba0-d7b0-11ee-8715-cb882b1de5a8",
+							"width": 112,
+							"height": 8,
+							"defUid": 23,
+							"px": [16,0],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "GravityBall",
+							"__grid": [14,2],
+							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#63C74D",
-							"iid": "efed2b70-d7b0-11ee-8759-d3c86d8dfb93",
+							"iid": "6b0d5980-d7b0-11ee-8715-7d0726cfd17b",
 							"width": 8,
 							"height": 8,
-							"defUid": 10,
-							"px": [96,64],
-							"fieldInstances": [{ "__identifier": "Exit_ref", "__type": "EntityRef", "__value": {
-								"entityIid": "f20228c0-d7b0-11ee-8759-c53276b8df34",
-								"layerIid": "bcc97c72-d7b0-11ee-8894-ddcfc2d410be",
-								"levelIid": "e9071650-d7b0-11ee-8894-8f22f68443c4",
-								"worldIid": "94e3ac31-d7b0-11ee-8429-f395ff985ff4"
-							}, "__tile": null, "defUid": 26, "realEditorValues": [{
+							"defUid": 34,
+							"px": [112,16],
+							"fieldInstances": [{ "__identifier": "Gravity", "__type": "LocalEnum.Gravity", "__value": "Down", "__tile": null, "defUid": 36, "realEditorValues": [{
 								"id": "V_String",
-								"params": ["f20228c0-d7b0-11ee-8759-c53276b8df34"]
+								"params": ["Down"]
 							}] }]
 						},
 						{
-							"__identifier": "PortalExit",
-							"__grid": [21,8],
+							"__identifier": "Door",
+							"__grid": [12,6],
 							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
-							"__smartColor": "#E4A672",
-							"iid": "f20228c0-d7b0-11ee-8759-c53276b8df34",
+							"__smartColor": "#BE4A2F",
+							"iid": "a060b530-d7b0-11ee-8715-2dc0a31754fd",
 							"width": 8,
-							"height": 8,
-							"defUid": 24,
-							"px": [168,64],
-							"fieldInstances": []
+							"height": 24,
+							"defUid": 14,
+							"px": [96,48],
+							"fieldInstances": [{ "__identifier": "Gravity", "__type": "LocalEnum.Gravity", "__value": "Down", "__tile": null, "defUid": 37, "realEditorValues": [{
+								"id": "V_String",
+								"params": ["Down"]
+							}] }]
 						}
 					]
 				},
@@ -1857,20 +1942,6 @@
 							"height": 8,
 							"defUid": 23,
 							"px": [96,72],
-							"fieldInstances": []
-						},
-						{
-							"__identifier": "PortalExit",
-							"__grid": [9,8],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#E4A672",
-							"iid": "94da4760-d7b0-11ee-8759-ef083ccde13c",
-							"width": 8,
-							"height": 8,
-							"defUid": 24,
-							"px": [72,64],
 							"fieldInstances": []
 						}
 					]

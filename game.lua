@@ -5,7 +5,10 @@ local transition = nil
 
 local player = nil
 local entities = {}
+local gravity_balls = {}
+local doors = {}
 local camera = nil
+local collides = {}
 
 local Circle = {
     x = 128 * 0.5,
@@ -23,7 +26,7 @@ Circle._update = function(self)
     self.y = 128 * 0.5
 
     self.r = juice.circleOut(math.min(self.frame / 15, 1)) * 200 * 0.5
-    if self.r >= 300 * 0.5 then
+    if self.r >= 200 * 0.5 then
         player.transition = false
         transition = nil
     end
@@ -60,13 +63,33 @@ Camera.move_to = function(self, x, y)
     gfx.camera(self.x, self.y)
 end
 
+function on_gravity_change(current_ball)
+    for c in all(gravity_balls) do
+        c.consumed = false
+    end
+    current_ball.consumed = true
+end
+
 function load_level(new_level, previous_level)
     entities = {}
+    gravity_balls = {}
+    doors = {}
+    collides = {}
+
     for p in all(map.entities["Portal"]) do
         local portal = entities_factory.createPortal(p, load_level)
         table.insert(entities, portal)
     end
 
+    for p in all(map.entities["Door"]) do
+        local portal = entities_factory.createDoor(p)
+        table.insert(entities, portal)
+        table.insert(collides, portal)
+    end
+    
+    for c in all(map.entities["Collision"]) do
+        table.insert(collides, c)
+    end
     camera.x = math.clamp(0, player.x - 128 * 0.5, map.width())
     camera.y = math.clamp(0, player.y - 128 * 0.5, map.height())
 
@@ -78,9 +101,18 @@ function load_level(new_level, previous_level)
             next = new_level
         })
     end
+
+    for p in all(map.entities["GravityBall"]) do
+        local portal = entities_factory.createGravityBall(p)
+        p.on_gravity_change = on_gravity_change
+        table.insert(entities, portal)
+        table.insert(gravity_balls, portal)
+    end
 end
 
 function _init()
+    
+
     for p in all(map.entities["Spawn"]) do
         player = player_factory.createPlayer(p)
     end
@@ -94,7 +126,7 @@ function _update()
         e:_update(player)
     end
 
-    player:_update(map.entities["Collision"])
+    player:_update(collides)
 
     if transition ~= nil then
         transition:_update()
@@ -122,4 +154,8 @@ function _draw()
     end
 
     player:_draw()
+
+    for c in all(map.entities["Collision"]) do
+        shape.rect(c.x, c.y, c.width, c.height, 8)
+    end
 end

@@ -3,7 +3,8 @@ local Door = {
     y = 128,
     width = 0,
     height = 0,
-    traversable = false,
+    max_width = 0,
+    max_height = 0,
     open = 0,
     gravity = {
         x = 0,
@@ -21,36 +22,36 @@ local world_gravity = {
     ref = 0.1
 }
 
-Door._update = function(self)
+Door._update = function(self, player)
     if self.gravity.x ~= 0 then
-        if math.sign(self.gravity.x) == math.sign(world_gravity.x) then
-            self.open = math.min(self.open + math.abs(world_gravity.x), 1)
+        if math.sign(self.gravity.x) == math.sign(player.gravity_x) then
+            self.open = math.min(self.open + math.abs(player.gravity_x), 1)
         else
-            self.open = math.max(0, self.open - math.abs(world_gravity.x))
+            self.open = math.max(0, self.open - math.abs(player.gravity_x))
         end
     end
 
     if self.gravity.y ~= 0 then
-        if math.sign(self.gravity.y) == math.sign(world_gravity.y) then
-            self.open = math.min(self.open + math.abs(world_gravity.y), 1)
+        if math.sign(self.gravity.y) == math.sign(player.gravity_y) then
+            self.open = math.min(self.open + math.abs(player.gravity_y), 1)
         else
-            self.open = math.max(0, self.open - math.abs(world_gravity.y))
+            self.open = math.max(0, self.open - math.abs(player.gravity_y))
         end
     end
 
     if (self.gravity.x ~= 0) then
-        self.lock.x = self.open * 60 * self.gravity.x + self.x
+        self.lock.x = self.open * self.max_width * self.gravity.x + self.x
         self.width = self.lock.x - self.x
     else
         self.lock.x = self.x
-        self.width = 1
+        self.width = self.max_width
     end
 
     if (self.gravity.y ~= 0) then
-        self.lock.y = self.open * 60 * self.gravity.y + self.y
+        self.lock.y = self.open * self.max_height * self.gravity.y + self.y
         self.height = self.lock.y - self.y
     else
-        self.height = 1
+        self.height = self.max_height
         self.lock.y = self.y
     end
 end
@@ -59,10 +60,33 @@ Door._draw = function(self)
     shape.line(self.x, self.y, self.lock.x, self.lock.y, 2)
     shape.circlef(self.x, self.y, 8, 2)
     shape.circlef(self.lock.x, self.lock.y, 4, 3)
+
+    shape.rect(self.x, self.y, self.width, self.height, 3)
 end
 
 Door._init = function(self)
     self.lock = {}
+    self.max_height = self.height
+    self.max_width = self.width
+
+    if self.customFields.Gravity == "Up" then 
+        self.gravity = {
+            x = 0, y = -1
+        }
+    elseif self.customFields.Gravity == "Left" then 
+        self.gravity = {
+            x = -1, y = 0
+        }
+    elseif self.customFields.Gravity == "Right" then 
+        self.gravity = {
+            x = 1, y = 0
+        }
+    else
+        self.gravity = {
+            x = 0, y = 1
+        }
+    end
+
 end
 
 local Platform = {
@@ -109,6 +133,76 @@ end
 
 Platform._draw = function(self)
     shape.rectf(self.x, self.y, self.width, self.height, 1)
+end
+
+local GravityBall = {
+    x = 0,
+    y = 10,
+    height = 8,
+    width = 8,
+    r = 4,
+    gravity_x = 0,
+    gravity_y = 0,
+    consumed = false,
+    gravity = nil,
+    on_gravity_change = nil
+}
+
+GravityBall._init = function(self)
+    if self.customFields.Gravity == "Up" then
+        self.gravity_x = 0
+        self.gravity_y = -1
+    elseif self.customFields.Gravity == "Left" then
+        self.gravity_x = -1
+        self.gravity_y = 0
+    elseif self.customFields.Gravity == "Right" then
+        self.gravity_x = 1
+        self.gravity_y = 0
+    else -- Down
+        self.gravity_x = 0
+        self.gravity_y = 1
+    end
+
+    self.gravity = self.customFields.Gravity
+end
+
+GravityBall._update = function(self, player)
+    if self.consumed then
+        return
+    end
+
+    if math.dst2(self.x, self.y, player.x + player.width * 0.5, player.y + player.height * 0.5) <= 4 * 4 then
+        -- colide with player
+        player.gravity_x = self.gravity_x * 0.5
+        player.gravity_y = self.gravity_y * 0.5
+        player.gravity_x_sign = sign2(self.gravity_x)
+        player.gravity_y_sign = sign2(self.gravity_y)
+        player.y_velociy = 0
+
+        self.consumed = true
+        if self.on_gravity_change ~= nil then
+            self.on_gravity_change(self)
+        end
+    end
+end
+
+GravityBall._draw = function(self)
+    if self.consumed then
+        return
+    end
+
+    local color = 0
+    if self.gravity == "Up" then
+        color = 3
+    elseif self.gravity == "Left" then
+        color = 4
+    elseif self.gravity == "Right" then
+        color = 5
+    else
+        color = 6
+    end
+
+    shape.circlef(self.x, self.y, self.r, color)
 end
 
 local Portal = {
@@ -229,9 +323,8 @@ Portal._draw = function(self)
     gfx.to_sheet(9) -- temporary sheet
 
     -- draw the other level fragment
-    spr.sdraw(cx - self.fragment_width * 0.5, cy - self.fragment_width * 0.5, 
-    0, 0, 
-    self.fragment_width, self.fragment_width)
+    spr.sdraw(cx - self.fragment_width * 0.5, cy - self.fragment_width * 0.5, 0, 0, self.fragment_width,
+        self.fragment_width)
 
     -- draw the temporary sheet
     spr.sheet(9)
@@ -240,20 +333,11 @@ Portal._draw = function(self)
     spr.sheet(current)
 end
 
-local doors = {}
-local platforms = {}
-local player = {}
-local portals = {}
-
-local elements = {}
-
 local factory = {}
 
 factory.createDoor = function(data)
     local d = new(Door, data)
     d:_init()
-    table.insert(elements, d)
-    table.insert(doors, d)
     return d
 end
 
@@ -269,22 +353,27 @@ factory.createPlatform = function(data)
 
     p:_init()
 
-    table.insert(platforms, p)
-    table.insert(elements, p)
-
     return p
 end
+
+local portals_id = 0
 
 factory.createPortal = function(data, on_level_change)
     local p = new(Portal, data)
 
-    table.insert(portals, p)
-    table.insert(elements, p)
-
-    p.index = 10 + #portals
+    p.index = 10 + portals_id
+    portals_id = portals_id + 1
 
     p:_init()
     p.on_level_change = on_level_change
+    return p
+end
+
+factory.createGravityBall = function(data, on_gravity_change)
+    local p = new(GravityBall, data)
+    
+    p:_init()
+    p.on_gravity_change = on_gravity_change
     return p
 end
 
