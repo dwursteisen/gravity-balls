@@ -96,6 +96,8 @@ local Platform = {
     target_y = 0,
     x = 0,
     y = 10,
+    traversable = true,
+    moveable = true, -- the player should tick to these object
     height = 4,
     width = 64,
     direction_x = 0,
@@ -103,7 +105,9 @@ local Platform = {
     mode = 0, -- 0 : cycle ; 1 = ping pong
     progress = 0,
     duration = 0,
-    step = 0
+    step = 0,
+    dt_x = 0,
+    dt_y = 0,
 }
 
 function sign2(value)
@@ -115,20 +119,58 @@ function sign2(value)
 end
 
 Platform._init = function(self)
+   
+    if self.customFields.Gravity == "Up" then
+        self.origin_x = self.x
+        self.origin_y = self.y + self.height
+        self.target_x = self.x
+        self.target_y = self.y
+
+    elseif self.customFields.Gravity == "Left" then
+        self.origin_x = self.x + self.width
+        self.origin_y = self.y
+        self.target_x = self.x
+        self.target_y = self.y
+
+    elseif self.customFields.Gravity == "Right" then
+        self.origin_x = self.x 
+        self.origin_y = self.y
+        self.target_x = self.x+ self.width
+        self.target_y = self.y
+    else
+        self.origin_x = self.x
+        self.origin_y = self.y
+        self.target_x = self.x
+        self.target_y = self.y +  self.height
+    end
+
+    self.height = 4
+    self.width = 32
+
+    -- self.duration = 3
+    
     self.direction_x = sign2(self.target_x - self.origin_x)
     self.direction_y = sign2(self.target_y - self.origin_y)
-    self.step = tiny.dt / self.duration
+    self.step = 0.01
+    self.dst = math.floor(math.dst(self.origin_x, self.origin_y, self.target_x, self.target_y))
+
+
 end
 
-Platform._update = function(self)
+Platform._update = function(self, player)
     self.progress = self.progress + self.step
     if self.progress > 1.0 then -- reset progress
         self.progress = 0
+        player.stick_to = nil
     end
 
-    local dst = math.dst(self.origin_x, self.origin_y, self.target_x, self.target_y)
-    self.x = self.origin_x + self.progress * self.direction_x * dst
-    self.y = self.origin_y + self.progress * self.direction_y * dst
+    local cx = self.x
+    local cy = self.y
+    self.x = math.floor(self.origin_x + self.progress * self.direction_x * self.dst)
+    self.y = math.floor(self.origin_y + self.progress * self.direction_y * self.dst)
+
+    self.dt_x = cx - self.x
+    self.dt_y = cy - self.y
 end
 
 Platform._draw = function(self)
@@ -342,14 +384,7 @@ factory.createDoor = function(data)
 end
 
 factory.createPlatform = function(data)
-    local p = new(Platform, {
-        origin_x = 0,
-        origin_y = 0,
-        target_x = 0,
-        target_y = 128,
-        progress = 0.5,
-        duration = 3 -- 3 seconds
-    })
+    local p = new(Platform, data)
 
     p:_init()
 

@@ -90,6 +90,13 @@ function load_level(new_level, previous_level)
     for c in all(map.entities["Collision"]) do
         table.insert(collides, c)
     end
+
+    for c in all(map.entities["Platform"]) do
+        local portal = entities_factory.createPlatform(c)
+        table.insert(entities, portal)
+        table.insert(collides, portal)
+    end
+
     camera.x = math.clamp(0, player.x - 128 * 0.5, map.width())
     camera.y = math.clamp(0, player.y - 128 * 0.5, map.height())
 

@@ -18,8 +18,8 @@
 				"id": "Spawn",
 				"iid": "fc65f890-d7b0-11ee-8894-ad3afc2a1509",
 				"layer": "Entities",
-				"x": 32,
-				"y": 40,
+				"x": 24,
+				"y": 8,
 				"width": 8,
 				"height": 8,
 				"color": 39387,
@@ -114,22 +114,20 @@
 				"height": 8,
 				"color": 15389866,
 				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "0e66a5b0-d7b0-11ee-8715-a5d0308d615c",
+				"layer": "Entities",
+				"x": 96,
+				"y": 8,
+				"width": 8,
+				"height": 40,
+				"color": 15389866,
+				"customFields" : {}
 			}
 		],
 		"GravityBall": [
-			{
-				"id": "GravityBall",
-				"iid": "61674d50-d7b0-11ee-8715-f3ea482d31a1",
-				"layer": "Entities",
-				"x": 56,
-				"y": 64,
-				"width": 8,
-				"height": 8,
-				"color": 6539085,
-				"customFields": {
-					"Gravity": "Up"
-				}
-			},
 			{
 				"id": "GravityBall",
 				"iid": "6b0d5980-d7b0-11ee-8715-7d0726cfd17b",
@@ -141,6 +139,19 @@
 				"color": 6539085,
 				"customFields": {
 					"Gravity": "Down"
+				}
+			},
+			{
+				"id": "GravityBall",
+				"iid": "1f81eb70-d7b0-11ee-8715-9d515d18307d",
+				"layer": "Entities",
+				"x": 60,
+				"y": 68,
+				"width": 8,
+				"height": 8,
+				"color": 6539085,
+				"customFields": {
+					"Gravity": "Up"
 				}
 			}
 		],
@@ -154,6 +165,21 @@
 				"width": 8,
 				"height": 24,
 				"color": 12470831,
+				"customFields": {
+					"Gravity": "Down"
+				}
+			}
+		],
+		"Platform": [
+			{
+				"id": "Platform",
+				"iid": "93ba2650-d7b0-11ee-8715-411080be6a23",
+				"layer": "Entities",
+				"x": 80,
+				"y": 8,
+				"width": 16,
+				"height": 40,
+				"color": 14120515,
 				"customFields": {
 					"Gravity": "Down"
 				}

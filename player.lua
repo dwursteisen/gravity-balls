@@ -13,6 +13,7 @@ local Player = {
     jumping = false,
     x_dir = 1,
     y_dir = 0,
+    stick_to = nil,
 }
 
 Player._init = function(self)
@@ -49,6 +50,12 @@ function collide_and_slide(object, obstacle)
 end
 
 Player._update = function(self, collisions, platforms)
+    if self.stick_to ~= nil then
+        self.x = self.x - self.stick_to.dt_x
+        self.y = self.y - self.stick_to.dt_y
+        self.stick_to = nil
+    end
+
     -- move horizontally
     if ctrl.pressing(keys.left) then -- move left
         self.x = self.x - self.speed
@@ -78,12 +85,15 @@ Player._update = function(self, collisions, platforms)
     for c in all(collisions) do
         if check_collision(c, {
             x = self.x,
-            y = self.y + 1 * self.gravity_y_sign,
+            y = self.y + 2 * self.gravity_y_sign,
             width = self.width,
             height = self.height
         }) then
             self.jumping = false
             self.y_velocity = 0
+            if c.moveable then
+                self.stick_to = c
+            end
 
         end
     end
@@ -91,9 +101,6 @@ end
 
 Player._draw = function(self)
     shape.rectf(self.x, self.y, self.width, self.height, 3)
-
-    debug.log(self.gravity_y_sign)
-    debug.log(self.y_velocity)
 end
 
 local factory = {}
