@@ -144,6 +144,7 @@ end
 
 function _init()
 
+    map.level(0)
     for p in all(map.entities["Spawn"]) do
         player = player_factory.createPlayer(p)
     end
@@ -174,11 +175,12 @@ function _update()
     end
 end
 
+
 function _draw()
     local config = background[player.gravity_x_sign][player.gravity_y_sign]
     gfx.cls(config.color)
 
-    spr.sheet("tiles.png")
+    local prec = spr.sheet("tiles.png")
     for i=-16,128 + 16,16 do
         for j=-16, 128 + 16,16 do
         
@@ -186,6 +188,7 @@ function _draw()
             spr.sdraw(camera.x + i +  camera.x % 16, camera.y + offset + j + camera.y % 16, config.spr.x, config.spr.y, 16, 16)
         end
     end
+    spr.sheet(prec)
 
     
     map.layer(1)
@@ -202,8 +205,4 @@ function _draw()
     end
 
     player:_draw()
-
-    for c in all(map.entities["Collision"]) do
-        shape.rect(c.x, c.y, c.width, c.height, 8)
-    end
 end

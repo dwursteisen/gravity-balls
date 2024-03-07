@@ -69,21 +69,25 @@ Door._init = function(self)
     self.max_height = self.height
     self.max_width = self.width
 
-    if self.customFields.Gravity == "Up" then 
+    if self.customFields.Gravity == "Up" then
         self.gravity = {
-            x = 0, y = -1
+            x = 0,
+            y = -1
         }
-    elseif self.customFields.Gravity == "Left" then 
+    elseif self.customFields.Gravity == "Left" then
         self.gravity = {
-            x = -1, y = 0
+            x = -1,
+            y = 0
         }
-    elseif self.customFields.Gravity == "Right" then 
+    elseif self.customFields.Gravity == "Right" then
         self.gravity = {
-            x = 1, y = 0
+            x = 1,
+            y = 0
         }
     else
         self.gravity = {
-            x = 0, y = 1
+            x = 0,
+            y = 1
         }
     end
 
@@ -107,7 +111,7 @@ local Platform = {
     duration = 0,
     step = 0,
     dt_x = 0,
-    dt_y = 0,
+    dt_y = 0
 }
 
 function sign2(value)
@@ -119,7 +123,7 @@ function sign2(value)
 end
 
 Platform._init = function(self)
-   
+
     if self.customFields.Gravity == "Up" then
         self.origin_x = self.x
         self.origin_y = self.y + self.height
@@ -133,27 +137,26 @@ Platform._init = function(self)
         self.target_y = self.y
 
     elseif self.customFields.Gravity == "Right" then
-        self.origin_x = self.x 
+        self.origin_x = self.x
         self.origin_y = self.y
-        self.target_x = self.x+ self.width
+        self.target_x = self.x + self.width
         self.target_y = self.y
     else
         self.origin_x = self.x
         self.origin_y = self.y
         self.target_x = self.x
-        self.target_y = self.y +  self.height
+        self.target_y = self.y + self.height
     end
 
     self.height = 4
     self.width = 32
 
     -- self.duration = 3
-    
+
     self.direction_x = sign2(self.target_x - self.origin_x)
     self.direction_y = sign2(self.target_y - self.origin_y)
     self.step = 0.01
     self.dst = math.floor(math.dst(self.origin_x, self.origin_y, self.target_x, self.target_y))
-
 
 end
 
@@ -282,7 +285,6 @@ Portal._init = function(self)
 
     self.target_level = self.customFields.Exit_ref.levelIid
 
-    local current = map.level(self.target_level)
 
     for e in all(map.entities["PortalExit"]) do
         if e.iid == self.customFields.Exit_ref.entityIid then
@@ -304,21 +306,6 @@ Portal._init = function(self)
     local cy = self.target_y + self.height * 0.5
     self.fragment_width = square_size(self.r) * 2 + 5
 
-    map.draw(0, 0, -- where to draw?     
-    cx - self.fragment_width * 0.5, cy - self.fragment_width * 0.5, -- from where in the max?
-    self.fragment_width, self.fragment_width -- size of the fragment
-    )
-
-    map.level(current)
-
-    local cx = self.x + self.width * 0.5
-    local cy = self.y + self.height * 0.5
-
-    -- draw map next to the other map
-    map.draw(self.fragment_width, 0, cx - self.fragment_width * 0.5, cy - self.fragment_width * 0.5,
-        self.fragment_width, self.fragment_width)
-    gfx.to_sheet(self.index)
-
 end
 
 function check_collision(rect1, rect2)
@@ -338,18 +325,12 @@ Portal._update = function(self, player)
 end
 
 Portal._draw = function(self)
+
     local portal = self
     -- draw portal
 
-    local current = spr.sheet(self.index)
-
     local cx = self.x + self.width * 0.5
     local cy = self.y + self.height * 0.5
-
-    -- draw current map fragment and create a hole in it
-    -- fixme: maybe useless
-    spr.sdraw(cx - self.fragment_width * 0.5, cy - self.fragment_width * 0.5, self.fragment_width, 0,
-        self.fragment_width, self.fragment_width)
 
     shape.circle(portal.x, portal.y, portal.r + math.cos(tiny.t * 5) * 2 + 1, 1)
 
@@ -361,23 +342,14 @@ Portal._draw = function(self)
             5 + math.sin(tiny.t * s.speed) * 4 + 1, 1)
 
         shape.circlef(portal.x + math.cos(tiny.t * s.speed) * s.dst_x, portal.y + math.cos(tiny.t * s.speed) * s.dst_y,
-            5 + math.sin(tiny.t * s.speed) * 4, 0)
+            5 + math.sin(tiny.t * s.speed) * 4, 2)
 
         shape.circlef(portal.x + math.cos(tiny.t * s.speed) * s.dst_x, portal.y + math.sin(tiny.t * s.speed) * s.dst_y,
-            5 + math.sin(tiny.t * s.speed) * 4, 0)
+            5 + math.sin(tiny.t * s.speed) * 4, 2)
     end
-    shape.circlef(portal.x, portal.y, portal.r + math.cos(tiny.t * 5) * 2, 0)
-    gfx.to_sheet(9) -- temporary sheet
+    shape.circlef(portal.x, portal.y, portal.r + math.cos(tiny.t * 5) * 2, 2)
 
-    -- draw the other level fragment
-    spr.sdraw(cx - self.fragment_width * 0.5, cy - self.fragment_width * 0.5, 0, 0, self.fragment_width,
-        self.fragment_width)
-
-    -- draw the temporary sheet
-    spr.sheet(9)
-    spr.sdraw()
-
-    spr.sheet(current)
+    print("exit", portal.x - 6, portal.y, 4)
 end
 
 local factory = {}
@@ -411,7 +383,7 @@ end
 
 factory.createGravityBall = function(data, on_gravity_change)
     local p = new(GravityBall, data)
-    
+
     p:_init()
     p.on_gravity_change = on_gravity_change
     return p

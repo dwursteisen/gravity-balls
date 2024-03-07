@@ -1005,7 +1005,7 @@
 					"entityInstances": [
 						{
 							"__identifier": "Spawn",
-							"__grid": [3,1],
+							"__grid": [3,4],
 							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
@@ -1014,7 +1014,7 @@
 							"width": 8,
 							"height": 8,
 							"defUid": 9,
-							"px": [24,8],
+							"px": [24,32],
 							"fieldInstances": []
 						},
 						{
@@ -1209,6 +1209,42 @@
 							"fieldInstances": [{ "__identifier": "Gravity", "__type": "LocalEnum.Gravity", "__value": "Up", "__tile": null, "defUid": 36, "realEditorValues": [{
 								"id": "V_String",
 								"params": ["Up"]
+							}] }]
+						},
+						{
+							"__identifier": "Collision",
+							"__grid": [16,0],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#EAD4AA",
+							"iid": "d360d6a0-d7b0-11ee-8715-57f6dacc535f",
+							"width": 8,
+							"height": 48,
+							"defUid": 23,
+							"px": [128,0],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Portal",
+							"__grid": [16,7],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#63C74D",
+							"iid": "d7fa34e0-d7b0-11ee-8715-758a193f42f5",
+							"width": 8,
+							"height": 8,
+							"defUid": 10,
+							"px": [128,56],
+							"fieldInstances": [{ "__identifier": "Exit_ref", "__type": "EntityRef", "__value": {
+								"entityIid": "dcc94920-d7b0-11ee-8715-63f9e72ba8f5",
+								"layerIid": "849eda53-d7b0-11ee-8759-c523f9ea5604",
+								"levelIid": "849eda50-d7b0-11ee-8759-cd30da54f49e",
+								"worldIid": "94e3ac31-d7b0-11ee-8429-f395ff985ff4"
+							}, "__tile": null, "defUid": 26, "realEditorValues": [{
+								"id": "V_String",
+								"params": ["dcc94920-d7b0-11ee-8715-63f9e72ba8f5"]
 							}] }]
 						}
 					]
@@ -1969,6 +2005,20 @@
 							"height": 8,
 							"defUid": 23,
 							"px": [96,72],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "PortalExit",
+							"__grid": [4,6],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#E4A672",
+							"iid": "dcc94920-d7b0-11ee-8715-63f9e72ba8f5",
+							"width": 8,
+							"height": 8,
+							"defUid": 24,
+							"px": [32,48],
 							"fieldInstances": []
 						}
 					]

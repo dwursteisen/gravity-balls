@@ -25,9 +25,6 @@
         "player.lua"
     ],
     "spritesheets": [
-        "miniature.png",
-        "miniature_inv.png",
-        "player.png",
         "wizard.png",
         "ball.png",
         "tiles.png"
