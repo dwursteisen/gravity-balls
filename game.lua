@@ -48,17 +48,23 @@ end
 
 local Camera = {
     x = 0,
-    y = 0
+    y = 0,
+    target_x = 0,
+    target_y = 0
 }
 
 Camera.move_to = function(self, x, y)
-    
+
     local cx = math.clamp(0, x - 128 * 0.5, map.width())
     local cy = math.clamp(0, y - 128 * 0.5, map.height())
 
+    self.target_x = cx
+    self.target_y = cy
+end
 
-    self.x = juice.pow2(cx, self.x, 0.01)
-    self.y = juice.pow2(cy, self.y, 0.01)
+Camera._update = function(self)
+    self.x = juice.powIn2(self.x, self.target_x, 0.4)
+    self.y = juice.powIn2(self.y, self.target_y, 0.4)
 
     gfx.camera(self.x, self.y)
 end
@@ -86,7 +92,7 @@ function load_level(new_level, previous_level)
         table.insert(entities, portal)
         table.insert(collides, portal)
     end
-    
+
     for c in all(map.entities["Collision"]) do
         table.insert(collides, c)
     end
@@ -101,7 +107,7 @@ function load_level(new_level, previous_level)
     camera.y = math.clamp(0, player.y - 128 * 0.5, map.height())
 
     gfx.camera(camera.x, camera.y)
---
+    --
     if player.transition then
         transition = new(Circle, {
             prev = previous_level,
@@ -118,7 +124,6 @@ function load_level(new_level, previous_level)
 end
 
 function _init()
-    
 
     for p in all(map.entities["Spawn"]) do
         player = player_factory.createPlayer(p)
@@ -139,17 +144,23 @@ function _update()
         transition:_update()
     end
 
+    camera:_update()
+
     if player.x_dir > 0 then
-        camera:move_to(player.x + 10, player.y)
+        camera:move_to(player.x + 10 + player.width * 0.5, player.y + player.height * 0.5)
     elseif player.x_dir < 0 then
-        camera:move_to(player.x - 10, player.y)
+        camera:move_to(player.x - 10 + player.width * 0.5, player.y + player.height * 0.5)
     else
-        camera:move_to(player.x, player.y)
+        camera:move_to(player.x + player.width * 0.5, player.y + player.height * 0.5)
     end
 end
 
 function _draw()
     gfx.cls()
+
+    map.layer(1)
+    map.draw()
+    map.layer(2)
     map.draw()
 
     for e in all(entities) do

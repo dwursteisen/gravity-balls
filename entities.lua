@@ -247,9 +247,9 @@ GravityBall._draw = function(self)
         color = 6
     end
 
-    shape.circlef(self.x, self.y, self.r, color)
-    spr.sheet("ball.png")
+    local previous = spr.sheet("ball.png")
     spr.draw(self.animation + (tiny.frame * 0.2) % 24, self.x - self.r, self.y - self.r)
+    spr.sheet(previous)
 end
 
 local Portal = {
