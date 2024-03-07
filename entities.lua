@@ -25,17 +25,17 @@ local world_gravity = {
 Door._update = function(self, player)
     if self.gravity.x ~= 0 then
         if math.sign(self.gravity.x) == math.sign(player.gravity_x) then
-            self.open = math.min(self.open + math.abs(player.gravity_x), 1)
+            self.open = math.min(self.open + math.abs(player.gravity_x * 0.1), 1)
         else
-            self.open = math.max(0, self.open - math.abs(player.gravity_x))
+            self.open = math.max(0, self.open - math.abs(player.gravity_x * 0.1))
         end
     end
 
     if self.gravity.y ~= 0 then
         if math.sign(self.gravity.y) == math.sign(player.gravity_y) then
-            self.open = math.min(self.open + math.abs(player.gravity_y), 1)
+            self.open = math.min(self.open + math.abs(player.gravity_y * 0.1), 1)
         else
-            self.open = math.max(0, self.open - math.abs(player.gravity_y))
+            self.open = math.max(0, self.open - math.abs(player.gravity_y * 0.1))
         end
     end
 

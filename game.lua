@@ -19,6 +19,24 @@ local Circle = {
     cycle = 1
 }
 
+local background = {
+    -- gravity = left
+    [-1] = {[0] = {}, },
+    -- gravity = up / down
+    [0] = {[-1] = {
+        color = 6,
+        spr = {x = 16, y = 128}
+    }, [1] = {
+        color = 5,
+        spr = {x = 0, y = 128}
+    }},
+    -- gravity = right
+    [1] = {[0] = {
+        color = 1,
+        spr = {x = 0, y = 128}
+    }}
+}
+
 Circle._update = function(self)
     self.frame = self.frame + 1
 
@@ -34,6 +52,7 @@ end
 
 Circle._draw = function(self)
     map.level(self.prev)
+
     map.draw()
 
     shape.circlef(self.x, self.y, self.r, 0) -- draw transparent circle
@@ -156,8 +175,19 @@ function _update()
 end
 
 function _draw()
-    gfx.cls()
+    local config = background[player.gravity_x_sign][player.gravity_y_sign]
+    gfx.cls(config.color)
 
+    spr.sheet("tiles.png")
+    for i=-16,128 + 16,16 do
+        for j=-16, 128 + 16,16 do
+        
+            local offset = tiny.frame * 0.2 % 16 * player.gravity_y_sign
+            spr.sdraw(camera.x + i +  camera.x % 16, camera.y + offset + j + camera.y % 16, config.spr.x, config.spr.y, 16, 16)
+        end
+    end
+
+    
     map.layer(1)
     map.draw()
     map.layer(2)
