@@ -20,16 +20,53 @@ local Circle = {
 }
 
 local background = {
-   Up = {spr = {x = 16, y = 128} },
-   Down = { spr = {x = 0, y = 128}}
+    Up = {
+        spr = {
+            x = 16,
+            y = 128
+        }
+    },
+    Down = {
+        spr = {
+            x = 0,
+            y = 128
+        }
+    }
 }
 
 local gravity_colors = {
     Down = 4,
     Up = 3,
     Left = 4,
-    Right = 4,
+    Right = 4
 }
+
+
+function draw_background()
+    local config = background[player.gravity_str]
+    local prec = spr.sheet("tiles.png")
+    for i = -16, 128 + 16, 16 do
+        for j = -16, 128 + 16, 16 do
+            local offset = tiny.frame * 0.2 % 16 * player.gravity_y_sign
+            spr.sdraw(camera.x + i + camera.x % 16, camera.y + offset + j + camera.y % 16, config.spr.x, config.spr.y,
+                16, 16)
+        end
+    end
+    spr.sheet(prec)
+
+    local cx = camera.x + 128 * 0.5
+    local cy = camera.y + 128 * 0.5
+    local a = math.perlin(tiny.frame / 100, tiny.frame / 200, tiny.frame / 150) * 2 * math.pi
+    local b = 20 + math.perlin(tiny.frame / 50, tiny.frame / 100, tiny.frame / 200) * 20
+    shape.trianglef( -- triangle
+    cx + math.cos(a) * b, cy + math.sin(a) * b, -- a
+    cx + math.cos(a + math.pi * 2/3) * b, cy + math.sin(a + math.pi * 2/3) * b, -- b
+    cx + math.cos(a + math.pi * 4/3) * b, cy + math.sin(a + math.pi * 4/3) * b, -- c
+    2)
+
+    map.layer(2)
+    map.draw()
+end
 
 Circle._update = function(self)
     self.frame = self.frame + 1
@@ -47,16 +84,20 @@ end
 Circle._draw = function(self)
     map.level(self.prev)
 
-    map.draw()
+    draw_background()
+
+    shape.circlef(self.x, self.y, self.r + 8, 1)
 
     shape.circlef(self.x, self.y, self.r, 0) -- draw transparent circle
     gfx.to_sheet(8)
 
     map.level(self.next)
-    map.draw()
+    draw_background()
 
     spr.sheet(8)
     spr.sdraw()
+
+    -- shape.circle(self.x, self.y, self.r, 1)
 end
 
 local Camera = {
@@ -81,7 +122,6 @@ Camera._update = function(self)
 
     gfx.camera(math.floor(self.x), math.floor(self.y))
 end
-
 
 local Particle = {
     x = 0,
@@ -147,7 +187,7 @@ function on_gravity_change(current_ball)
         p.r = 3
         p.dir_x = math.cos(angle) * 1
         p.dir_y = math.sin(angle) * 1
-        p.x = player.x + player.width * 0.5 + p.dir_x 
+        p.x = player.x + player.width * 0.5 + p.dir_x
         p.y = player.y + player.height * 0.5 + p.dir_y
         p.ttl = 0.3
         p.color = gravity_colors[current_ball.gravity]
@@ -242,23 +282,7 @@ end
 
 
 function _draw()
-    gfx.cls(gravity_colors[player.gravity_str])
-
-    local config = background[player.gravity_str]
-    local prec = spr.sheet("tiles.png")
-    for i=-16,128 + 16,16 do
-        for j=-16, 128 + 16,16 do
-            local offset = tiny.frame * 0.2 % 16 * player.gravity_y_sign
-            spr.sdraw(camera.x + i +  camera.x % 16, camera.y + offset + j + camera.y % 16, config.spr.x, config.spr.y, 16, 16)
-        end
-    end
-    spr.sheet(prec)
-
-    
-    map.layer(1)
-    map.draw()
-    map.layer(2)
-    map.draw()
+    draw_background()
 
     for e in all(entities) do
         e:_draw()

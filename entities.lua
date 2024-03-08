@@ -223,7 +223,7 @@ GravityBall._update = function(self, player)
         return
     end
 
-    if math.dst2(self.x, self.y, player.x + player.width * 0.5, player.y + player.height * 0.5) <= 4 * 4 then
+    if math.dst2(self.x, self.y, player.x + player.width * 0.5, player.y + player.height * 0.5) <= 5 * 5 then
         -- colide with player
         player.gravity_x = self.gravity_x * 0.5
         player.gravity_y = self.gravity_y * 0.5
