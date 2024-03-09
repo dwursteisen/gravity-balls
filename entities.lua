@@ -52,7 +52,7 @@ Door._update = function(self, player)
     if (self.gravity.y ~= 0) then
         if self.gravity.y < 0 then
             self.y = (1 - self.open) * self.max_height + self.origin_y
-            self.lock.y = self.open * self.max_height + self.y 
+            self.lock.y = self.open * self.max_height + self.y
         else
             self.lock.y = self.open * self.max_height * self.gravity.y + self.y
         end
@@ -224,6 +224,26 @@ GravityBall._init = function(self)
     end
 
     self.gravity = self.customFields.Gravity
+    self.direction = self.customFields.Direction
+
+    if self.direction ~= "null" then
+        if self.direction == "Up" then
+            self.dy = -1
+            self.dx = 0
+        elseif self.direction == "Down" then
+            self.dy = 1
+            self.dx = 0
+        elseif self.direction == "Left" then
+            self.dx = -1
+            self.dy = 0
+        else
+            self.dx = 1
+            self.dy = 0
+        end
+    else
+        self.dx = 0
+        self.dy = 0
+    end
 end
 
 GravityBall._update = function(self, player)
@@ -244,6 +264,16 @@ GravityBall._update = function(self, player)
             self.on_gravity_change(self)
         end
     end
+
+    for b in all(self.bouncer) do
+        if math.dst2(self.x, self.y, b.x + b.width * 0.5, b.y + b.height * 0.5) <= (self.r * self.r + 4 * 4) then
+            self.dx = self.dx * -1
+            self.dy = self.dy * -1
+        end
+    end
+    self.x = self.x + self.dx * 0.3
+    self.y = self.y + self.dy * 0.3
+
 end
 
 GravityBall._draw = function(self)

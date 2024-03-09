@@ -149,7 +149,8 @@
 				"height": 8,
 				"color": 6539085,
 				"customFields": {
-					"Gravity": "Down"
+					"Gravity": "Down",
+					"Direction": "Left"
 				}
 			},
 			{
@@ -162,7 +163,8 @@
 				"height": 8,
 				"color": 6539085,
 				"customFields": {
-					"Gravity": "Up"
+					"Gravity": "Up",
+					"Direction": null
 				}
 			}
 		],
@@ -240,6 +242,30 @@
 				"customFields": {
 					"Gravity": "Down"
 				}
+			}
+		],
+		"Bouncer": [
+			{
+				"id": "Bouncer",
+				"iid": "81f316d0-d7b0-11ee-9d1d-abf8682d1235",
+				"layer": "Entities",
+				"x": 16,
+				"y": 16,
+				"width": 8,
+				"height": 8,
+				"color": 16705377,
+				"customFields" : {}
+			},
+			{
+				"id": "Bouncer",
+				"iid": "83e43870-d7b0-11ee-9d1d-f39d2c4717da",
+				"layer": "Entities",
+				"x": 48,
+				"y": 16,
+				"width": 8,
+				"height": 8,
+				"color": 16705377,
+				"customFields" : {}
 			}
 		]
 	}

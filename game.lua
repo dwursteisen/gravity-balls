@@ -288,9 +288,31 @@ function load_level(new_level, previous_level)
         })
     end
 
+    function find_bouncer(ball, bouncers)
+        local dir = ball.customFields.Direction 
+       
+        local result = {}
+
+        if dir == "Left" or dir == "Right" then
+            for b in all(bouncers) do
+                if b.y == ball.y then
+                    table.insert(result, b)
+                end
+            end
+        elseif dir == "Up" or dir == "Down" then
+            for b in all(bouncers) do
+                if b.x == ball.x then
+                    table.insert(result, b)
+                end
+            end
+        end
+        return result
+    end
+
     for p in all(map.entities["GravityBall"]) do
         local portal = entities_factory.createGravityBall(p)
         p.on_gravity_change = on_gravity_change
+        p.bouncer = find_bouncer(p, map.entities["Bouncer"])
         table.insert(entities, portal)
         table.insert(gravity_balls, portal)
     end

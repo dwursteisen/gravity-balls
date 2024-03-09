@@ -11,7 +11,7 @@
 	"iid": "94e3ac30-d7b0-11ee-8429-d3dd7330a4c5",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 39,
+	"nextUid": 41,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "LinearHorizontal",
@@ -748,8 +748,80 @@
 					"allowedRefsEntityUid": null,
 					"allowedRefTags": [],
 					"tilesetUid": null
+				},
+				{
+					"identifier": "Direction",
+					"doc": null,
+					"__type": "LocalEnum.Gravity",
+					"uid": 40,
+					"type": "F_Enum(35)",
+					"isArray": false,
+					"canBeNull": true,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayScale": 1,
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorDisplayColor": null,
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"exportToToc": false,
+					"searchable": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefsEntityUid": null,
+					"allowedRefTags": [],
+					"tilesetUid": null
 				}
 			]
+		},
+		{
+			"identifier": "Bouncer",
+			"uid": 39,
+			"tags": [],
+			"exportToToc": false,
+			"allowOutOfBounds": false,
+			"doc": null,
+			"width": 8,
+			"height": 8,
+			"resizableX": false,
+			"resizableY": false,
+			"minWidth": null,
+			"maxWidth": null,
+			"minHeight": null,
+			"maxHeight": null,
+			"keepAspectRatio": false,
+			"tileOpacity": 1,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#FEE761",
+			"renderMode": "Rectangle",
+			"showName": true,
+			"tilesetId": null,
+			"tileRenderMode": "FitInside",
+			"tileRect": null,
+			"uiTileRect": null,
+			"nineSliceBorders": [],
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": []
 		}
 	], "tilesets": [
 		{
@@ -1141,10 +1213,16 @@
 							"height": 8,
 							"defUid": 34,
 							"px": [44,16],
-							"fieldInstances": [{ "__identifier": "Gravity", "__type": "LocalEnum.Gravity", "__value": "Down", "__tile": null, "defUid": 36, "realEditorValues": [{
-								"id": "V_String",
-								"params": ["Down"]
-							}] }]
+							"fieldInstances": [
+								{ "__identifier": "Gravity", "__type": "LocalEnum.Gravity", "__value": "Down", "__tile": null, "defUid": 36, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Down"]
+								}] },
+								{ "__identifier": "Direction", "__type": "LocalEnum.Gravity", "__value": "Left", "__tile": null, "defUid": 40, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Left"]
+								}] }
+							]
 						},
 						{
 							"__identifier": "Collision",
@@ -1172,10 +1250,13 @@
 							"height": 8,
 							"defUid": 34,
 							"px": [44,68],
-							"fieldInstances": [{ "__identifier": "Gravity", "__type": "LocalEnum.Gravity", "__value": "Up", "__tile": null, "defUid": 36, "realEditorValues": [{
-								"id": "V_String",
-								"params": ["Up"]
-							}] }]
+							"fieldInstances": [
+								{ "__identifier": "Gravity", "__type": "LocalEnum.Gravity", "__value": "Up", "__tile": null, "defUid": 36, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Up"]
+								}] },
+								{ "__identifier": "Direction", "__type": "LocalEnum.Gravity", "__value": null, "__tile": null, "defUid": 40, "realEditorValues": [] }
+							]
 						},
 						{
 							"__identifier": "Collision",
@@ -1280,6 +1361,34 @@
 								"id": "V_String",
 								"params": ["Down"]
 							}] }]
+						},
+						{
+							"__identifier": "Bouncer",
+							"__grid": [2,2],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#FEE761",
+							"iid": "81f316d0-d7b0-11ee-9d1d-abf8682d1235",
+							"width": 8,
+							"height": 8,
+							"defUid": 39,
+							"px": [16,16],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Bouncer",
+							"__grid": [6,2],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#FEE761",
+							"iid": "83e43870-d7b0-11ee-9d1d-f39d2c4717da",
+							"width": 8,
+							"height": 8,
+							"defUid": 39,
+							"px": [48,16],
+							"fieldInstances": []
 						}
 					]
 				},
