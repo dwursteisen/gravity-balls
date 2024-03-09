@@ -3,6 +3,8 @@ local Door = {
     y = 128,
     width = 0,
     height = 0,
+    origin_x = 0,
+    origin_y = 0,
     max_width = 0,
     max_height = 0,
     open = 0,
@@ -48,6 +50,9 @@ Door._update = function(self, player)
     end
 
     if (self.gravity.y ~= 0) then
+        -- TODO: set le x/y correctement, si gravité inverse
+        -- la reference est le origin_x
+
         self.lock.y = self.open * self.max_height * self.gravity.y + self.y
         self.height = self.lock.y - self.y
     else
@@ -68,7 +73,8 @@ Door._init = function(self)
     self.lock = {}
     self.max_height = self.height
     self.max_width = self.width
-
+    self.origin_x = self.x
+    self.origin_y = self.y
     if self.customFields.Gravity == "Up" then
         self.gravity = {
             x = 0,

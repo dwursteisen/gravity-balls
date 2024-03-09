@@ -41,6 +41,31 @@ local gravity_colors = {
     Right = 4
 }
 
+local rgravity_colors = {
+    Down = 3,
+    Up = 4,
+    Left = 3,
+    Right = 3
+}
+
+function triangle(x, y, size, color, rnd)
+    local cx = x
+    local cy = y
+    local a = math.perlin(tiny.frame / rnd, tiny.frame / rnd * 2, tiny.frame / rnd + 50) * 2 * math.pi
+    local b = size + math.perlin(tiny.frame / 50, tiny.frame / 100, tiny.frame / 200) * 20
+    shape.trianglef( -- triangle
+    2 + cx + math.cos(a) * b, 2 + cy + math.sin(a) * b, -- a
+    2 + cx + math.cos(a + math.pi * 2 / 3) * b, 2 + cy + math.sin(a + math.pi * 2 / 3) * b, -- b
+    2 + cx + math.cos(a + math.pi * 4 / 3) * b, 2 + cy + math.sin(a + math.pi * 4 / 3) * b, -- c
+    1)
+
+    shape.trianglef( -- triangle
+    cx + math.cos(a) * b, cy + math.sin(a) * b, -- a
+    cx + math.cos(a + math.pi * 2 / 3) * b, cy + math.sin(a + math.pi * 2 / 3) * b, -- b
+    cx + math.cos(a + math.pi * 4 / 3) * b, cy + math.sin(a + math.pi * 4 / 3) * b, -- c
+    color)
+
+end
 
 function draw_background()
     local config = background[player.gravity_str]
@@ -54,15 +79,16 @@ function draw_background()
     end
     spr.sheet(prec)
 
-    local cx = camera.x + 128 * 0.5
+    local cx = camera.x + 128 * 0.4
     local cy = camera.y + 128 * 0.5
-    local a = math.perlin(tiny.frame / 100, tiny.frame / 200, tiny.frame / 150) * 2 * math.pi
-    local b = 20 + math.perlin(tiny.frame / 50, tiny.frame / 100, tiny.frame / 200) * 20
-    shape.trianglef( -- triangle
-    cx + math.cos(a) * b, cy + math.sin(a) * b, -- a
-    cx + math.cos(a + math.pi * 2/3) * b, cy + math.sin(a + math.pi * 2/3) * b, -- b
-    cx + math.cos(a + math.pi * 4/3) * b, cy + math.sin(a + math.pi * 4/3) * b, -- c
-    2)
+
+    local p1 = math.perlin(tiny.frame / 100, tiny.frame / 100, tiny.frame / 100) * 30
+    local p2 = math.perlin(tiny.frame / 200, tiny.frame / 200, tiny.frame / 200) * 30
+    local p3 = math.perlin(tiny.frame / 300, tiny.frame / 300, tiny.frame / 300) * 30
+    triangle(camera.x + 128 * 0.1 + p1, camera.y + 128 * 0.1 + p2, 5, rgravity_colors[player.gravity_str], 150)
+    triangle(camera.x + 128 * 0.8 + p2, camera.y + 128 * 0.1 + p3, 5, rgravity_colors[player.gravity_str], 250)
+    triangle(camera.x + 128 * 0.5 + p3, camera.y + 128 * 0.7 + p1, 5, rgravity_colors[player.gravity_str], 200)
+    triangle(cx + p2, cy + p1, 20, 2, 100)
 
     map.layer(2)
     map.draw()
@@ -164,6 +190,31 @@ particles._draw = function()
     end
 end
 
+function add_dust(x, y, gravity)
+
+    local factory = function(index, p)
+        p.x = x + 4 + math.rnd(4)
+        if gravity == "Up" then
+            p.y = y - 2 + math.rnd(5)
+        else
+            p.y = y + 6 + math.rnd(5)
+        end
+        p.ttl = 0.4
+        p.r = 4
+        return p
+    end
+
+    local update = function(p)
+        p.r = juice.powOut2(0, p.r, p.ttl / 0.3)
+    end
+
+    local draw = function(p)
+        shape.circlef(p.x, p.y, p.r, 2)
+        shape.circle(p.x, p.y, p.r, 1)
+    end
+    particles.create(3, factory, update, draw)
+end
+
 function on_gravity_change(current_ball)
     for c in all(gravity_balls) do
         c.consumed = false
@@ -261,7 +312,13 @@ function _update()
         e:_update(player)
     end
 
+    local was_jumping = player.jumping
     player:_update(collides)
+    if not was_jumping and player.jumping then
+        add_dust(player.x, player.y, player.gravity_str)
+    elseif ctrl.pressed(keys.left) or ctrl.pressed(keys.right) then
+        add_dust(player.x, player.y, player.gravity_str)
+    end
 
     if transition ~= nil then
         transition:_update()
@@ -279,7 +336,6 @@ function _update()
 
     particles:_update()
 end
-
 
 function _draw()
     draw_background()

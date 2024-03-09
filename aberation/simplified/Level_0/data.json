@@ -143,7 +143,7 @@
 				"id": "GravityBall",
 				"iid": "6b0d5980-d7b0-11ee-8715-7d0726cfd17b",
 				"layer": "Entities",
-				"x": 68,
+				"x": 116,
 				"y": 16,
 				"width": 8,
 				"height": 8,
@@ -156,7 +156,7 @@
 				"id": "GravityBall",
 				"iid": "1f81eb70-d7b0-11ee-8715-9d515d18307d",
 				"layer": "Entities",
-				"x": 36,
+				"x": 68,
 				"y": 68,
 				"width": 8,
 				"height": 8,
@@ -166,42 +166,12 @@
 				}
 			}
 		],
-		"Door": [
-			{
-				"id": "Door",
-				"iid": "a060b530-d7b0-11ee-8715-2dc0a31754fd",
-				"layer": "Entities",
-				"x": 96,
-				"y": 48,
-				"width": 8,
-				"height": 24,
-				"color": 12470831,
-				"customFields": {
-					"Gravity": "Down"
-				}
-			}
-		],
-		"Platform": [
-			{
-				"id": "Platform",
-				"iid": "93ba2650-d7b0-11ee-8715-411080be6a23",
-				"layer": "Entities",
-				"x": 80,
-				"y": 8,
-				"width": 16,
-				"height": 40,
-				"color": 14120515,
-				"customFields": {
-					"Gravity": "Down"
-				}
-			}
-		],
 		"Portal": [
 			{
 				"id": "Portal",
 				"iid": "d7fa34e0-d7b0-11ee-8715-758a193f42f5",
 				"layer": "Entities",
-				"x": 56,
+				"x": 128,
 				"y": 56,
 				"width": 16,
 				"height": 16,
@@ -213,6 +183,49 @@
 						"levelIid": "849eda50-d7b0-11ee-8759-cd30da54f49e",
 						"worldIid": "94e3ac31-d7b0-11ee-8429-f395ff985ff4"
 					}
+				}
+			}
+		],
+		"Platform": [
+			{
+				"id": "Platform",
+				"iid": "7f32b4a0-d7b0-11ee-8457-bfb1f083d851",
+				"layer": "Entities",
+				"x": 80,
+				"y": 8,
+				"width": 16,
+				"height": 40,
+				"color": 14120515,
+				"customFields": {
+					"Gravity": "Down"
+				}
+			},
+			{
+				"id": "Platform",
+				"iid": "835227f0-d7b0-11ee-8457-b32ff17b28ba",
+				"layer": "Entities",
+				"x": 64,
+				"y": 8,
+				"width": 16,
+				"height": 40,
+				"color": 14120515,
+				"customFields": {
+					"Gravity": "Up"
+				}
+			}
+		],
+		"Door": [
+			{
+				"id": "Door",
+				"iid": "8cff1d80-d7b0-11ee-8457-27da56cb46fd",
+				"layer": "Entities",
+				"x": 8,
+				"y": 8,
+				"width": 8,
+				"height": 40,
+				"color": 12470831,
+				"customFields": {
+					"Gravity": "Up"
 				}
 			}
 		]

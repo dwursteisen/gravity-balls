@@ -12,9 +12,10 @@ local Player = {
     gravity_x_sign = 0,
     jump_height = 100,
     jumping = false,
+    stop_jumping = -1,
     x_dir = 1,
     y_dir = 0,
-    stick_to = nil,
+    stick_to = nil
 }
 
 Player._init = function(self)
@@ -71,8 +72,15 @@ Player._update = function(self, collisions, platforms)
     self.y_velocity = math.clamp(-5, self.y_velocity + self.gravity_y, 5)
     self.y = self.y + self.y_velocity
 
+    if self.stop_jumping > 4 then
+        self.stop_jumping = -2
+    elseif self.stop_jumping >= 0 then
+        self.stop_jumping = self.stop_jumping + 0.5
+    end
+
     if ctrl.pressing(keys.space) and not self.jumping then
         self.jumping = true
+        self.stop_jumping = -1
         self.y_velocity = -5 * self.gravity_y_sign
         self.y = self.y - 1 * self.gravity_y_sign
     end
@@ -91,6 +99,9 @@ Player._update = function(self, collisions, platforms)
             height = self.height
         }) then
             self.jumping = false
+            if self.stop_jumping == -1 then
+                self.stop_jumping = 0
+            end
             self.y_velocity = 0
             if c.moveable then
                 self.stick_to = c
@@ -104,15 +115,14 @@ local invert_h = {
     Down = false,
     Up = true,
     Left = false,
-    Right = false,
+    Right = false
 }
-
 
 local invert_v = {
     Down = false,
     Up = true,
     Left = false,
-    Right = false,
+    Right = false
 }
 
 Player._draw = function(self)
@@ -120,8 +130,11 @@ Player._draw = function(self)
     -- shape.rectf(self.x, self.y, self.width, self.height, 3)
     if self.jumping then
         spr.draw(36 + (tiny.frame * 0.2) % 4, self.x, self.y, self.x_dir ~= 1, invert_h[self.gravity_str])
+    elseif self.stop_jumping >= 0 then
+        spr.draw(math.floor(40 + self.stop_jumping), self.x, self.y, self.x_dir ~= 1, invert_h[self.gravity_str])
     else
-        spr.draw(19 + (tiny.frame * 0.2) % 16, self.x, self.y, self.x_dir ~= 1, invert_h[self.gravity_str])
+        local id = 19 + (tiny.frame * 0.2) % 16
+        spr.draw(id, self.x, self.y, self.x_dir ~= 1, invert_h[self.gravity_str])
     end
 
     spr.sheet(current)
