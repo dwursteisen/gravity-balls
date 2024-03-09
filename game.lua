@@ -143,10 +143,29 @@ Camera.move_to = function(self, x, y)
 end
 
 Camera._update = function(self)
-    self.x = juice.powIn2(self.x, self.target_x, 0.4)
-    self.y = juice.powIn2(self.y, self.target_y, 0.4)
+    self.x = math.clamp(0, juice.powIn2(self.x, self.target_x, 0.4), map.width() - 128)
+    self.y = math.clamp(0, juice.powIn2(self.y, self.target_y, 0.4), map.height() - 128)
 
     gfx.camera(math.floor(self.x), math.floor(self.y))
+end
+
+local Title = {}
+
+Title._update = function(self)
+end
+
+Title._draw = function(self)
+    local prev = spr.sheet("tiles.png")
+    for column = 0, 97 - 1, 1 do
+        local offset = juice.linear(math.cos((tiny.frame  + column * 4) / 5)) * 0.8
+
+        spr.sdraw(self.x + column, self.y + offset, -- position on the screen
+        120 + column, 72, -- position in the spritesheet
+        1, 41 -- size
+        )
+
+    end
+    spr.sheet(prev)
 end
 
 local Particle = {
@@ -289,8 +308,8 @@ function load_level(new_level, previous_level)
     end
 
     function find_bouncer(ball, bouncers)
-        local dir = ball.customFields.Direction 
-       
+        local dir = ball.customFields.Direction
+
         local result = {}
 
         if dir == "Left" or dir == "Right" then
@@ -316,6 +335,7 @@ function load_level(new_level, previous_level)
         table.insert(entities, portal)
         table.insert(gravity_balls, portal)
     end
+
 end
 
 function _init()
@@ -327,6 +347,11 @@ function _init()
 
     camera = new(Camera)
     load_level()
+
+    for p in all(map.entities["Title"]) do
+        local title = new(Title, p)
+        table.insert(entities, title)
+    end
 end
 
 function _update()

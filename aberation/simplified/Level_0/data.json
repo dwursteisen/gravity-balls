@@ -42,9 +42,9 @@
 				"id": "Collision",
 				"iid": "94a944c0-d7b0-11ee-8759-3b908d415d06",
 				"layer": "Entities",
-				"x": 16,
-				"y": 72,
-				"width": 64,
+				"x": 0,
+				"y": 104,
+				"width": 144,
 				"height": 8,
 				"color": 15389866,
 				"customFields" : {}
@@ -57,39 +57,6 @@
 				"y": 80,
 				"width": 16,
 				"height": 16,
-				"color": 15389866,
-				"customFields" : {}
-			},
-			{
-				"id": "Collision",
-				"iid": "9a03f730-d7b0-11ee-8759-5be3b07e6c68",
-				"layer": "Entities",
-				"x": 72,
-				"y": 80,
-				"width": 8,
-				"height": 24,
-				"color": 15389866,
-				"customFields" : {}
-			},
-			{
-				"id": "Collision",
-				"iid": "9c0aeac0-d7b0-11ee-8759-e5bb3239a533",
-				"layer": "Entities",
-				"x": 96,
-				"y": 72,
-				"width": 8,
-				"height": 32,
-				"color": 15389866,
-				"customFields" : {}
-			},
-			{
-				"id": "Collision",
-				"iid": "9dc2d3f0-d7b0-11ee-8759-9b044e597f36",
-				"layer": "Entities",
-				"x": 72,
-				"y": 96,
-				"width": 32,
-				"height": 8,
 				"color": 15389866,
 				"customFields" : {}
 			},
@@ -173,8 +140,8 @@
 				"id": "Portal",
 				"iid": "d7fa34e0-d7b0-11ee-8715-758a193f42f5",
 				"layer": "Entities",
-				"x": 128,
-				"y": 56,
+				"x": 120,
+				"y": 88,
 				"width": 16,
 				"height": 16,
 				"color": 6539085,
@@ -265,6 +232,19 @@
 				"width": 8,
 				"height": 8,
 				"color": 16705377,
+				"customFields" : {}
+			}
+		],
+		"Title": [
+			{
+				"id": "Title",
+				"iid": "9622cbb0-d7b0-11ee-9d1d-03614203daad",
+				"layer": "Entities",
+				"x": 16,
+				"y": 24,
+				"width": 97,
+				"height": 41,
+				"color": 11551418,
 				"customFields" : {}
 			}
 		]
