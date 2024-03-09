@@ -1131,7 +1131,7 @@
 						},
 						{
 							"__identifier": "GravityBall",
-							"__grid": [14,2],
+							"__grid": [5,2],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -1140,7 +1140,7 @@
 							"width": 8,
 							"height": 8,
 							"defUid": 34,
-							"px": [116,16],
+							"px": [44,16],
 							"fieldInstances": [{ "__identifier": "Gravity", "__type": "LocalEnum.Gravity", "__value": "Down", "__tile": null, "defUid": 36, "realEditorValues": [{
 								"id": "V_String",
 								"params": ["Down"]
@@ -1162,7 +1162,7 @@
 						},
 						{
 							"__identifier": "GravityBall",
-							"__grid": [8,8],
+							"__grid": [5,8],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -1171,7 +1171,7 @@
 							"width": 8,
 							"height": 8,
 							"defUid": 34,
-							"px": [68,68],
+							"px": [44,68],
 							"fieldInstances": [{ "__identifier": "Gravity", "__type": "LocalEnum.Gravity", "__value": "Up", "__tile": null, "defUid": 36, "realEditorValues": [{
 								"id": "V_String",
 								"params": ["Up"]
@@ -1254,14 +1254,31 @@
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
-							"iid": "8cff1d80-d7b0-11ee-8457-27da56cb46fd",
+							"iid": "098ff4c0-d7b0-11ee-9d1d-7592c00f75ee",
 							"width": 8,
-							"height": 40,
+							"height": 16,
 							"defUid": 14,
 							"px": [8,8],
 							"fieldInstances": [{ "__identifier": "Gravity", "__type": "LocalEnum.Gravity", "__value": "Up", "__tile": null, "defUid": 37, "realEditorValues": [{
 								"id": "V_String",
 								"params": ["Up"]
+							}] }]
+						},
+						{
+							"__identifier": "Door",
+							"__grid": [7,1],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "0ac6ee20-d7b0-11ee-9d1d-e1fd572be90e",
+							"width": 8,
+							"height": 16,
+							"defUid": 14,
+							"px": [56,8],
+							"fieldInstances": [{ "__identifier": "Gravity", "__type": "LocalEnum.Gravity", "__value": "Down", "__tile": null, "defUid": 37, "realEditorValues": [{
+								"id": "V_String",
+								"params": ["Down"]
 							}] }]
 						}
 					]

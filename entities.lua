@@ -50,10 +50,12 @@ Door._update = function(self, player)
     end
 
     if (self.gravity.y ~= 0) then
-        -- TODO: set le x/y correctement, si gravité inverse
-        -- la reference est le origin_x
-
-        self.lock.y = self.open * self.max_height * self.gravity.y + self.y
+        if self.gravity.y < 0 then
+            self.y = (1 - self.open) * self.max_height + self.origin_y
+            self.lock.y = self.open * self.max_height + self.y 
+        else
+            self.lock.y = self.open * self.max_height * self.gravity.y + self.y
+        end
         self.height = self.lock.y - self.y
     else
         self.height = self.max_height

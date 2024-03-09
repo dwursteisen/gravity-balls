@@ -143,7 +143,7 @@
 				"id": "GravityBall",
 				"iid": "6b0d5980-d7b0-11ee-8715-7d0726cfd17b",
 				"layer": "Entities",
-				"x": 116,
+				"x": 44,
 				"y": 16,
 				"width": 8,
 				"height": 8,
@@ -156,7 +156,7 @@
 				"id": "GravityBall",
 				"iid": "1f81eb70-d7b0-11ee-8715-9d515d18307d",
 				"layer": "Entities",
-				"x": 68,
+				"x": 44,
 				"y": 68,
 				"width": 8,
 				"height": 8,
@@ -217,15 +217,28 @@
 		"Door": [
 			{
 				"id": "Door",
-				"iid": "8cff1d80-d7b0-11ee-8457-27da56cb46fd",
+				"iid": "098ff4c0-d7b0-11ee-9d1d-7592c00f75ee",
 				"layer": "Entities",
 				"x": 8,
 				"y": 8,
 				"width": 8,
-				"height": 40,
+				"height": 16,
 				"color": 12470831,
 				"customFields": {
 					"Gravity": "Up"
+				}
+			},
+			{
+				"id": "Door",
+				"iid": "0ac6ee20-d7b0-11ee-9d1d-e1fd572be90e",
+				"layer": "Entities",
+				"x": 56,
+				"y": 8,
+				"width": 8,
+				"height": 16,
+				"color": 12470831,
+				"customFields": {
+					"Gravity": "Down"
 				}
 			}
 		]
