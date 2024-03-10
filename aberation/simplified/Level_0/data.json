@@ -3,7 +3,7 @@
 	"uniqueIdentifer": "e9071650-d7b0-11ee-8894-8f22f68443c4",
 	"x": -1,
 	"y": -1,
-	"width": 600,
+	"width": 520,
 	"height": 128,
 	"bgColor": "#696A79",
 	"neighbourLevels": [],
@@ -136,30 +136,6 @@
 				"width": 8,
 				"height": 24,
 				"color": 15389866,
-				"customFields" : {}
-			}
-		],
-		"Death": [
-			{
-				"id": "Death",
-				"iid": "65fa0f80-d7b0-11ee-84cb-059eb5f1665f",
-				"layer": "Entities",
-				"x": 64,
-				"y": 104,
-				"width": 8,
-				"height": 8,
-				"color": 16711748,
-				"customFields" : {}
-			},
-			{
-				"id": "Death",
-				"iid": "667029e0-d7b0-11ee-84cb-47d73b787101",
-				"layer": "Entities",
-				"x": 224,
-				"y": 112,
-				"width": 8,
-				"height": 8,
-				"color": 16711748,
 				"customFields" : {}
 			}
 		]

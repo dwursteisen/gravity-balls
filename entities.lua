@@ -261,6 +261,7 @@ GravityBall._update = function(self, player)
 
         self.consumed = true
         if self.on_gravity_change ~= nil then
+            sfx.play(4)
             self.on_gravity_change(self)
         end
     end
