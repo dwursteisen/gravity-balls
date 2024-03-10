@@ -1,5 +1,6 @@
 local player_factory = require("player")
 local entities_factory = require("entities")
+local sequencer = require("sequencer")
 
 local transition = nil
 
@@ -268,6 +269,85 @@ function on_gravity_change(current_ball)
 
 end
 
+local win_circle1 = function(t, t_action, frame)
+    if frame == 0 then
+        local create = function(index, p)
+            p.x = player.x + 2
+            p.y = player.y + 2
+            p.r = 80
+            p.ttl = 1.1
+            return p
+        end
+
+        local update = function(p)
+            p.r = juice.powOut2(10, 80, (math.max(0, p.ttl - 0.5)) / 0.5)
+        end
+
+        local draw = function(p)
+            gfx.to_sheet(5)
+            gfx.cls(2)
+            shape.circlef(p.x, p.y, p.r, 0)
+            shape.circle(p.x, p.y, p.r, 1)
+            gfx.to_sheet(6)
+            local before = spr.sheet(5)
+            spr.sdraw()
+            spr.sheet(6)
+            spr.sdraw()
+            spr.sheet(before)
+        end
+
+        particles.create(1, create, update, draw)
+    end
+    return t_action >= 0.5
+end
+
+local start_win_animation = function(t, t_action, frame)
+    return true
+end
+
+local win_animation = function(t, t_action)
+    return t_action >= 0.5
+end
+
+local win_circle2 = function(t, t_action, frame)
+    if frame == 0 then
+        local create = function(index, p)
+            p.x = player.x + 2
+            p.y = player.y + 2
+            p.r = 10
+            p.ttl = 0.6
+            return p
+        end
+
+        local update = function(p)
+            p.r = juice.powOut2(1, 10, p.ttl / 0.5)
+        end
+
+        local draw = function(p)
+            gfx.to_sheet(5)
+            gfx.cls(2)
+            shape.circlef(p.x, p.y, p.r, 0)
+            shape.circle(p.x, p.y, p.r, 1)
+            gfx.to_sheet(6)
+            local before = spr.sheet(5)
+            spr.sdraw()
+            spr.sheet(6)
+            spr.sdraw()
+            spr.sheet(before)
+        end
+
+        particles.create(1, create, update, draw)
+    end
+    local result = t_action >= 0.5
+    return result
+end
+
+function restart_level()
+    player:restart()
+    load_level(map.level(), map.level())
+    return true
+end
+
 function load_level(new_level, previous_level)
     entities = {}
     gravity_balls = {}
@@ -343,6 +423,9 @@ function load_level(new_level, previous_level)
         
         player.killed = true
         player.killed_frame = -1
+
+        sequencer.create(start_win_animation).next(win_circle1).next(
+            win_animation).next(win_circle2).next(restart_level)
     end
     
     for p in all(map.entities["Death"]) do
@@ -382,9 +465,9 @@ function _update()
 
     local was_jumping = player.jumping
     player:_update(collides)
-    if not was_jumping and player.jumping then
+    if not player.killed and not was_jumping and player.jumping then
         add_dust(player.x, player.y, player.gravity_str)
-    elseif ctrl.pressed(keys.left) or ctrl.pressed(keys.right) then
+    elseif not player.killed and (ctrl.pressed(keys.left) or ctrl.pressed(keys.right)) then
         add_dust(player.x, player.y, player.gravity_str)
     end
 
@@ -403,20 +486,21 @@ function _update()
     end
 
     particles:_update()
+    sequencer._update()
 end
 
 function _draw()
     draw_background()
-
+    
     for e in all(entities) do
         e:_draw()
     end
-
+    
     particles:_draw()
-
+    
     if transition ~= nil then
         transition:_draw()
     end
-
+    
     player:_draw()
 end

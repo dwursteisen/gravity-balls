@@ -22,7 +22,8 @@
     "scripts": [
         "game.lua",
         "entities.lua",
-        "player.lua"
+        "player.lua",
+        "sequencer.lua"
     ],
     "spritesheets": [
         "wizard.png",

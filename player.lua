@@ -1,8 +1,8 @@
 local Player = {
     x = 0,
     y = 0,
-    width = 16,
-    height = 16,
+    width = 8,
+    height = 8,
     speed = 1.5,
     y_velocity = 0,
     gravity_str = "Down",
@@ -59,10 +59,10 @@ Player._update = function(self, collisions, platforms)
     end
 
     -- move horizontally
-    if ctrl.pressing(keys.left) then -- move left
+    if not self.killed and ctrl.pressing(keys.left) then -- move left
         self.x = self.x - self.speed
         self.x_dir = -1
-    elseif ctrl.pressing(keys.right) then -- move right
+    elseif not self.killed and ctrl.pressing(keys.right) then -- move right
         self.x = self.x + self.speed
         self.x_dir = 1
     end
@@ -85,7 +85,7 @@ Player._update = function(self, collisions, platforms)
         end
     end
 
-    if ctrl.pressing(keys.space) and not self.jumping then
+    if not self.killed and ctrl.pressing(keys.space) and not self.jumping then
         self.jumping = true
         self.stop_jumping = -1
         self.y_velocity = -5 * self.gravity_y_sign
@@ -150,10 +150,30 @@ Player._draw = function(self)
     spr.sheet(current)
 end
 
+Player.restart = function(self)
+    self.killed = false
+    self.x = self.start_x
+    self.y = self.start_y
+    
+    self.y_velocity = 0
+    self.gravity_str = "Down"
+    self.gravity_y = 0.5 -- actual gravity in the game
+    self.gravity_x = 0
+    self.gravity_y_sign = 1 -- sign of the gravity (-1 or 1). Might be equal to 0 if no gravity
+    self.gravity_x_sign = 0
+    self.jumping = false
+    self.stop_jumping = -1
+    self.x_dir = 1
+    self.y_dir = 0
+    self.stick_to = nil
+end
+
 local factory = {}
 
 factory.createPlayer = function(data)
     local p = new(Player, data)
+    p.start_x = p.x
+    p.start_y = p.y
     p:_init()
     return p
 end
