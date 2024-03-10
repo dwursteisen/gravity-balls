@@ -78,6 +78,13 @@ Player._update = function(self, collisions, platforms)
         self.stop_jumping = self.stop_jumping + 0.5
     end
 
+    if self.killed then
+        self.killed_frame = self.killed_frame + 0.5
+        if self.killed_frame > 7 then
+            self.killed_frame = 5
+        end
+    end
+
     if ctrl.pressing(keys.space) and not self.jumping then
         self.jumping = true
         self.stop_jumping = -1
@@ -130,6 +137,9 @@ Player._draw = function(self)
     -- shape.rectf(self.x, self.y, self.width, self.height, 3)
     if self.jumping then
         spr.draw(36 + (tiny.frame * 0.2) % 4, self.x, self.y, self.x_dir ~= 1, invert_h[self.gravity_str])
+    elseif self.killed then
+        local frame = 45 + self.killed_frame 
+        spr.draw(frame, self.x, self.y, self.x_dir ~= 1, invert_h[self.gravity_str])
     elseif self.stop_jumping >= 0 then
         spr.draw(math.floor(40 + self.stop_jumping), self.x, self.y, self.x_dir ~= 1, invert_h[self.gravity_str])
     else

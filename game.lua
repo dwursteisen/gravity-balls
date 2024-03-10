@@ -335,7 +335,21 @@ function load_level(new_level, previous_level)
         table.insert(entities, portal)
         table.insert(gravity_balls, portal)
     end
-
+    
+    local on_touch = function(box, player)
+        if player.killed then
+            return
+        end
+        
+        player.killed = true
+        player.killed_frame = -1
+    end
+    
+    for p in all(map.entities["Death"]) do
+        local box = entities_factory.createDeath(p)
+        box.on_touch = on_touch
+        table.insert(entities, box)
+    end
 end
 
 function _init()

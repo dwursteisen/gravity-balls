@@ -124,8 +124,8 @@
 				"id": "GravityBall",
 				"iid": "1f81eb70-d7b0-11ee-8715-9d515d18307d",
 				"layer": "Entities",
-				"x": 44,
-				"y": 68,
+				"x": 52,
+				"y": 100,
 				"width": 8,
 				"height": 8,
 				"color": 6539085,
@@ -245,6 +245,41 @@
 				"width": 97,
 				"height": 41,
 				"color": 11551418,
+				"customFields" : {}
+			}
+		],
+		"Death": [
+			{
+				"id": "Death",
+				"iid": "62fd0f50-d7b0-11ee-9d1d-038c85ad0edf",
+				"layer": "Entities",
+				"x": 72,
+				"y": 96,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
+				"customFields" : {}
+			},
+			{
+				"id": "Death",
+				"iid": "635875c0-d7b0-11ee-9d1d-0bd8a2bae999",
+				"layer": "Entities",
+				"x": 80,
+				"y": 96,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
+				"customFields" : {}
+			},
+			{
+				"id": "Death",
+				"iid": "63e80b90-d7b0-11ee-9d1d-1bd041a3ff7e",
+				"layer": "Entities",
+				"x": 88,
+				"y": 96,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
 				"customFields" : {}
 			}
 		]

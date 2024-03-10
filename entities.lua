@@ -393,7 +393,35 @@ Portal._draw = function(self)
     print("exit", cx - 6, cy, 4)
 end
 
+local Death = {
+    on_touch = function() end
+}
+
+Death._init = function(self)
+end
+
+Death._update = function(self, player)
+    if check_collision(self, player) then
+        self.on_touch(self, player)
+    end
+end
+
+Death._draw = function(self, player)
+    local prec = spr.sheet("tiles.png")
+
+    spr.sdraw(self.x, self.y, 0, 152, 8, 8)
+
+    spr.sheet(prec)
+end
+
 local factory = {}
+
+
+factory.createDeath = function(data)
+    local d = new(Death, data)
+    d:_init()
+    return d
+end
 
 factory.createDoor = function(data)
     local d = new(Door, data)
