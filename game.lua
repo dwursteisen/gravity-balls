@@ -97,6 +97,8 @@ function draw_background()
     triangle(camera.x + 128 * 0.5 + p3, camera.y + 128 * 0.7 + p1, 5, rgravity_colors[player.gravity_str], 200)
     triangle(cx + p2, cy + p1, 20, 2, 100)
 
+    map.layer(1)
+    map.draw()
     map.layer(2)
     map.draw()
 end
@@ -174,6 +176,18 @@ Title._draw = function(self)
     end
     spr.sheet(prev)
 end
+
+local Progress = {
+    x = (128 - 80) * 0.5, 
+    y = 0,
+    width = 80,
+    height = 10,
+    progress = 0,
+    max = 5
+}
+
+
+local progress = nil
 
 local Particle = {
     x = 0,
@@ -354,6 +368,8 @@ function load_level(new_level, previous_level)
     doors = {}
     collides = {}
 
+    progress.progress = new_level
+    
     player.start_x = player.x
     player.start_y = player.y
 
@@ -449,7 +465,10 @@ function load_level(new_level, previous_level)
     end
 end
 
+
+
 function _init()
+    progress = new(Progress)
 
     map.level(0)
     for p in all(map.entities["Spawn"]) do
@@ -503,6 +522,13 @@ function _draw()
         e:_draw()
     end
 
+    local p = spr.sheet("tiles.png")
+    spr.sdraw(progress.x, progress.y, 40, 128, progress.width, progress.height)
+    
+    local cursor = math.floor((progress.width - 8) * progress.progress / progress.max)
+    spr.sdraw(progress.x + cursor + 4, progress.y + 3, 56, 144, 6, 9)
+    spr.sheet(p)
+
     particles:_draw()
 
     if transition ~= nil then
@@ -510,4 +536,6 @@ function _draw()
     end
 
     player:_draw()
+
+    
 end

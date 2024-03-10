@@ -325,6 +325,7 @@ Portal._init = function(self)
         dst_y = -8
     }}
 
+    self.label = self.customFields.label
     self.target_level = self.customFields.Exit_ref.levelIid
 
     for e in all(map.entities["PortalExit"]) do
@@ -390,7 +391,7 @@ Portal._draw = function(self)
     end
     shape.circlef(cx, cy, portal.r + math.cos(tiny.t * 5) * 2, 2)
 
-    print("exit", cx - 6, cy, 4)
+    print(self.label, cx - 6, cy, 4)
 end
 
 local Death = {
