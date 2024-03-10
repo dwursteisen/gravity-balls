@@ -27,7 +27,8 @@
     "spritesheets": [
         "wizard.png",
         "ball.png",
-        "tiles.png"
+        "tiles.png",
+        "escargot.png"
     ],
     "levels": [
         "aberation/simplified/Level_0",

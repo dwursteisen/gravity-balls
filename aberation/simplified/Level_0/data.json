@@ -233,6 +233,28 @@
 				"height": 8,
 				"color": 16705377,
 				"customFields" : {}
+			},
+			{
+				"id": "Bouncer",
+				"iid": "09872aa0-d7b0-11ee-84cb-1d3838ba0f2a",
+				"layer": "Entities",
+				"x": 104,
+				"y": 96,
+				"width": 8,
+				"height": 8,
+				"color": 16705377,
+				"customFields" : {}
+			},
+			{
+				"id": "Bouncer",
+				"iid": "0ad52e70-d7b0-11ee-84cb-89a0b2604ab2",
+				"layer": "Entities",
+				"x": 0,
+				"y": 96,
+				"width": 8,
+				"height": 8,
+				"color": 16705377,
+				"customFields" : {}
 			}
 		],
 		"Title": [
@@ -281,6 +303,22 @@
 				"height": 8,
 				"color": 16711748,
 				"customFields" : {}
+			}
+		],
+		"Escargot": [
+			{
+				"id": "Escargot",
+				"iid": "62a5df70-d7b0-11ee-84cb-c39d3a8d5f2b",
+				"layer": "Entities",
+				"x": 8,
+				"y": 96,
+				"width": 16,
+				"height": 8,
+				"color": 7552569,
+				"customFields": {
+					"Gravity": "Down",
+					"Direction": "Right"
+				}
 			}
 		]
 	}

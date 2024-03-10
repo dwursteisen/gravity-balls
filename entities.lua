@@ -414,8 +414,46 @@ Death._draw = function(self, player)
     spr.sheet(prec)
 end
 
+local Escargot = {
+    dir_x = 1,
+    gravity = "Down",
+}
+
+Escargot._init = function(self)
+    self.gravity = self.customFields.Gravity
+end
+
+Escargot._draw = function(self)
+    local prec = spr.sheet("escargot.png")
+    local i = math.floor(self.x) % 8
+    local inv = self.gravity == "Up" 
+    local flip = self.dir_x == -1
+   
+    spr.sdraw(self.x, self.y, i * 16, 0, 16, 8, flip, inv)
+    spr.sheet(prec)
+end
+
+Escargot._update = function(self, player)
+    self.x = self.x + self.dir_x * 0.2
+
+    for b in all(self.bouncer) do
+        if check_collision(self, b) then
+            self.dir_x = self.dir_x * -1
+        end
+    end
+
+    if check_collision(self, player) then
+        self.on_touch(self, player)
+    end
+end
+
 local factory = {}
 
+factory.createEscargot = function(data)
+    local d = new(Escargot, data)
+    d:_init()
+    return d
+end
 
 factory.createDeath = function(data)
     local d = new(Death, data)

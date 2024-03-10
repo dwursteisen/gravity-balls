@@ -350,6 +350,13 @@ function load_level(new_level, previous_level)
         box.on_touch = on_touch
         table.insert(entities, box)
     end
+
+    for p in all(map.entities["Escargot"]) do
+        local box = entities_factory.createEscargot(p)
+        box.on_touch = on_touch
+        box.bouncer = find_bouncer(p, map.entities["Bouncer"])
+        table.insert(entities, box)
+    end
 end
 
 function _init()
