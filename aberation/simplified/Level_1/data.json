@@ -112,6 +112,28 @@
 				"height": 64,
 				"color": 15389866,
 				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "a65041e0-d7b0-11ee-84cb-1789c290af4d",
+				"layer": "Entities",
+				"x": 16,
+				"y": 56,
+				"width": 24,
+				"height": 8,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "b2859000-d7b0-11ee-84cb-03882a710a26",
+				"layer": "Entities",
+				"x": 24,
+				"y": 48,
+				"width": 16,
+				"height": 16,
+				"color": 15389866,
+				"customFields" : {}
 			}
 		],
 		"PortalExit": [
@@ -189,7 +211,7 @@
 				"id": "GravityBall",
 				"iid": "e63e40c0-d7b0-11ee-84cb-0de662e1500d",
 				"layer": "Entities",
-				"x": 52,
+				"x": 28,
 				"y": 76,
 				"width": 8,
 				"height": 8,
