@@ -59,13 +59,15 @@ Player._update = function(self, collisions, platforms)
         self.stick_to = nil
     end
 
-    -- move horizontally
-    if not self.killed and ctrl.pressing(keys.left) then -- move left
-        self.x = self.x - self.speed
-        self.x_dir = -1
-    elseif not self.killed and ctrl.pressing(keys.right) then -- move right
-        self.x = self.x + self.speed
-        self.x_dir = 1
+    if not self.transition then
+        -- move horizontally
+        if not self.killed and ctrl.pressing(keys.left) then -- move left
+            self.x = self.x - self.speed
+            self.x_dir = -1
+        elseif not self.killed and ctrl.pressing(keys.right) then -- move right
+            self.x = self.x + self.speed
+            self.x_dir = 1
+        end
     end
 
     -- Apply gravity
@@ -87,7 +89,7 @@ Player._update = function(self, collisions, platforms)
     end
 
     local was_jumping = self.jumping
-    
+
     if self.jumping == false and self.killed == false and (ctrl.pressing(keys.space)) then
 
         self.jumping = true
