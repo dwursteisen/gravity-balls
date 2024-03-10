@@ -12,5 +12,47 @@
 		"Tiles.png",
 		"IntGrid.png"
 	],
-	"entities" : {}
+	"entities": {
+		"PortalExit": [
+			{
+				"id": "PortalExit",
+				"iid": "c0f13990-d7b0-11ee-84cb-1397d592b303",
+				"layer": "Entities",
+				"x": 24,
+				"y": 216,
+				"width": 8,
+				"height": 8,
+				"color": 14984818,
+				"customFields" : {}
+			}
+		],
+		"Platform": [
+			{
+				"id": "Platform",
+				"iid": "c77e7890-d7b0-11ee-84cb-a9599d07228d",
+				"layer": "Entities",
+				"x": 56,
+				"y": 176,
+				"width": 16,
+				"height": 64,
+				"color": 14120515,
+				"customFields": {
+					"Gravity": "Down"
+				}
+			},
+			{
+				"id": "Platform",
+				"iid": "ccb77230-d7b0-11ee-84cb-61984b4adf9a",
+				"layer": "Entities",
+				"x": 104,
+				"y": 176,
+				"width": 16,
+				"height": 64,
+				"color": 14120515,
+				"customFields": {
+					"Gravity": "Up"
+				}
+			}
+		]
+	}
 }

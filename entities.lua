@@ -220,7 +220,7 @@ GravityBall._init = function(self)
     else -- Down
         self.gravity_x = 0
         self.gravity_y = 1
-        self.animation = 24
+        self.animation = 25
     end
 
     self.gravity = self.customFields.Gravity
