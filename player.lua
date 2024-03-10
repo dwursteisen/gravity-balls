@@ -15,7 +15,8 @@ local Player = {
     stop_jumping = -1,
     x_dir = 1,
     y_dir = 0,
-    stick_to = nil
+    stick_to = nil,
+    killed = false
 }
 
 Player._init = function(self)
@@ -85,11 +86,17 @@ Player._update = function(self, collisions, platforms)
         end
     end
 
-    if not self.killed and ctrl.pressing(keys.space) and not self.jumping then
+    local was_jumping = self.jumping
+    
+    if self.jumping == false and self.killed == false and (ctrl.pressing(keys.space)) then
+
         self.jumping = true
         self.stop_jumping = -1
         self.y_velocity = -5 * self.gravity_y_sign
         self.y = self.y - 1 * self.gravity_y_sign
+        if self.jumping then
+            sfx.play(0)
+        end
     end
 
     -- update player position
@@ -97,23 +104,26 @@ Player._update = function(self, collisions, platforms)
         collide_and_slide(self, c)
     end
 
-    -- check if grounded
-    for c in all(collisions) do
-        if check_collision(c, {
-            x = self.x,
-            y = self.y + 2 * self.gravity_y_sign,
-            width = self.width,
-            height = self.height
-        }) then
-            self.jumping = false
-            if self.stop_jumping == -1 then
-                self.stop_jumping = 0
-            end
-            self.y_velocity = 0
-            if c.moveable then
-                self.stick_to = c
-            end
+    if was_jumping and self.jumping then
 
+        -- check if grounded
+        for c in all(collisions) do
+            if check_collision(c, {
+                x = self.x,
+                y = self.y + 2 * self.gravity_y_sign,
+                width = self.width,
+                height = self.height
+            }) then
+                self.jumping = false
+                if self.stop_jumping == -1 then
+                    self.stop_jumping = 0
+                end
+                self.y_velocity = 0
+                if c.moveable then
+                    self.stick_to = c
+                end
+
+            end
         end
     end
 end
@@ -138,7 +148,7 @@ Player._draw = function(self)
     if self.jumping then
         spr.draw(36 + (tiny.frame * 0.2) % 4, self.x, self.y, self.x_dir ~= 1, invert_h[self.gravity_str])
     elseif self.killed then
-        local frame = 45 + self.killed_frame 
+        local frame = 45 + self.killed_frame
         spr.draw(frame, self.x, self.y, self.x_dir ~= 1, invert_h[self.gravity_str])
     elseif self.stop_jumping >= 0 then
         spr.draw(math.floor(40 + self.stop_jumping), self.x, self.y, self.x_dir ~= 1, invert_h[self.gravity_str])
@@ -154,7 +164,7 @@ Player.restart = function(self)
     self.killed = false
     self.x = self.start_x
     self.y = self.start_y
-    
+
     self.y_velocity = 0
     self.gravity_str = "Down"
     self.gravity_y = 0.5 -- actual gravity in the game

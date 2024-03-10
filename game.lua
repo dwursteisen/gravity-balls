@@ -304,15 +304,15 @@ local win_circle1 = function(t, t_action, frame)
         end
 
         local draw = function(p)
-            gfx.to_sheet(5)
+            gfx.to_sheet(10)
             gfx.cls(2)
             shape.circlef(p.x, p.y, p.r, 0)
             shape.circle(p.x, p.y, p.r, 1)
-            gfx.to_sheet(6)
-            local before = spr.sheet(5)
-            spr.sdraw()
-            spr.sheet(6)
-            spr.sdraw()
+            gfx.to_sheet(9)
+            local before = spr.sheet(10)
+            spr.sdraw(camera.x, camera.y)
+            spr.sheet(9)
+            spr.sdraw(camera.x, camera.y)
             spr.sheet(before)
         end
 
@@ -322,6 +322,7 @@ local win_circle1 = function(t, t_action, frame)
 end
 
 local start_win_animation = function(t, t_action, frame)
+    sfx.play(3)
     return true
 end
 
@@ -344,15 +345,15 @@ local win_circle2 = function(t, t_action, frame)
         end
 
         local draw = function(p)
-            gfx.to_sheet(5)
+            gfx.to_sheet(10)
             gfx.cls(2)
             shape.circlef(p.x, p.y, p.r, 0)
             shape.circle(p.x, p.y, p.r, 1)
-            gfx.to_sheet(6)
-            local before = spr.sheet(5)
-            spr.sdraw()
-            spr.sheet(6)
-            spr.sdraw()
+            gfx.to_sheet(9)
+            local before = spr.sheet(10)
+            spr.sdraw(camera.x, camera.y)
+            spr.sheet(9)
+            spr.sdraw(camera.x, camera.y)
             spr.sheet(before)
         end
 
@@ -495,6 +496,8 @@ function _update()
         add_dust(player.x, player.y, player.gravity_str)
     elseif not player.killed and (ctrl.pressed(keys.left) or ctrl.pressed(keys.right)) then
         add_dust(player.x, player.y, player.gravity_str)
+        sfx.play(1)
+    
     end
 
     if transition ~= nil then
@@ -523,10 +526,10 @@ function _draw()
     end
 
     local p = spr.sheet("tiles.png")
-    spr.sdraw(progress.x, progress.y, 40, 128, progress.width, progress.height)
+    spr.sdraw(camera.x + progress.x, camera.y + progress.y, 40, 128, progress.width, progress.height)
     
     local cursor = math.floor((progress.width - 8) * progress.progress / progress.max)
-    spr.sdraw(progress.x + cursor + 4, progress.y + 3, 56, 144, 6, 9)
+    spr.sdraw(camera.x + progress.x + cursor + 4, camera.y + progress.y + 3, 56, 144, 6, 9)
     spr.sheet(p)
 
     particles:_draw()

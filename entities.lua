@@ -362,6 +362,8 @@ Portal._update = function(self, player)
         player.x = self.target_x
         player.y = self.target_y
         player.transition = true
+        sfx.play(2)
+    
         self.on_level_change(map.level(), current_level)
     end
 end

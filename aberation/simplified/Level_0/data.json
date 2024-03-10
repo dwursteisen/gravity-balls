@@ -3,7 +3,7 @@
 	"uniqueIdentifer": "e9071650-d7b0-11ee-8894-8f22f68443c4",
 	"x": -1,
 	"y": -1,
-	"width": 128,
+	"width": 600,
 	"height": 128,
 	"bgColor": "#696A79",
 	"neighbourLevels": [],
@@ -31,7 +31,7 @@
 				"id": "Portal",
 				"iid": "d7fa34e0-d7b0-11ee-8715-758a193f42f5",
 				"layer": "Entities",
-				"x": 96,
+				"x": 432,
 				"y": 96,
 				"width": 16,
 				"height": 16,
@@ -67,7 +67,7 @@
 				"layer": "Entities",
 				"x": 0,
 				"y": 112,
-				"width": 128,
+				"width": 216,
 				"height": 8,
 				"color": 15389866,
 				"customFields" : {}
@@ -85,13 +85,81 @@
 			},
 			{
 				"id": "Collision",
-				"iid": "5fcc94d0-d7b0-11ee-84cb-43185a7a6e02",
+				"iid": "ac420200-d7b0-11ee-84cb-691808397201",
 				"layer": "Entities",
-				"x": 120,
+				"x": 208,
+				"y": 120,
+				"width": 40,
+				"height": 8,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "af4d4630-d7b0-11ee-84cb-2d746526a47d",
+				"layer": "Entities",
+				"x": 240,
+				"y": 104,
+				"width": 128,
+				"height": 8,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "b2d95320-d7b0-11ee-84cb-a1840760c880",
+				"layer": "Entities",
+				"x": 360,
+				"y": 112,
+				"width": 160,
+				"height": 8,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "b6917920-d7b0-11ee-84cb-11fd2444915e",
+				"layer": "Entities",
+				"x": 512,
 				"y": 0,
 				"width": 8,
 				"height": 112,
 				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "d9939200-d7b0-11ee-84cb-311d84d32791",
+				"layer": "Entities",
+				"x": 240,
+				"y": 104,
+				"width": 8,
+				"height": 24,
+				"color": 15389866,
+				"customFields" : {}
+			}
+		],
+		"Death": [
+			{
+				"id": "Death",
+				"iid": "65fa0f80-d7b0-11ee-84cb-059eb5f1665f",
+				"layer": "Entities",
+				"x": 64,
+				"y": 104,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
+				"customFields" : {}
+			},
+			{
+				"id": "Death",
+				"iid": "667029e0-d7b0-11ee-84cb-47d73b787101",
+				"layer": "Entities",
+				"x": 224,
+				"y": 112,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
 				"customFields" : {}
 			}
 		]
