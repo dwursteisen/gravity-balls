@@ -49,6 +49,12 @@ local rgravity_colors = {
     Right = 3
 }
 
+function restart_level()
+    player:restart()
+    load_level(map.level(), map.level())
+    return true
+end
+
 function triangle(x, y, size, color, rnd)
     local cx = x
     local cy = y
@@ -158,7 +164,7 @@ end
 Title._draw = function(self)
     local prev = spr.sheet("tiles.png")
     for column = 0, 97 - 1, 1 do
-        local offset = juice.linear(math.cos((tiny.frame  + column * 4) / 5)) * 0.8
+        local offset = juice.linear(math.cos((tiny.frame + column * 4) / 5)) * 0.8
 
         spr.sdraw(self.x + column, self.y + offset, -- position on the screen
         120 + column, 72, -- position in the spritesheet
@@ -272,8 +278,8 @@ end
 local win_circle1 = function(t, t_action, frame)
     if frame == 0 then
         local create = function(index, p)
-            p.x = player.x + 2
-            p.y = player.y + 2
+            p.x = player.x + player.width * 0.5 
+            p.y = player.y + player.height * 0.5    
             p.r = 80
             p.ttl = 1.1
             return p
@@ -312,8 +318,8 @@ end
 local win_circle2 = function(t, t_action, frame)
     if frame == 0 then
         local create = function(index, p)
-            p.x = player.x + 2
-            p.y = player.y + 2
+            p.x = player.x + player.width * 0.5 
+            p.y = player.y + player.height * 0.5    
             p.r = 10
             p.ttl = 0.6
             return p
@@ -342,17 +348,14 @@ local win_circle2 = function(t, t_action, frame)
     return result
 end
 
-function restart_level()
-    player:restart()
-    load_level(map.level(), map.level())
-    return true
-end
-
 function load_level(new_level, previous_level)
     entities = {}
     gravity_balls = {}
     doors = {}
     collides = {}
+
+    player.start_x = player.x
+    player.start_y = player.y
 
     for p in all(map.entities["Portal"]) do
         local portal = entities_factory.createPortal(p, load_level)
@@ -415,19 +418,23 @@ function load_level(new_level, previous_level)
         table.insert(entities, portal)
         table.insert(gravity_balls, portal)
     end
-    
+
     local on_touch = function(box, player)
         if player.killed then
             return
         end
-        
+
         player.killed = true
         player.killed_frame = -1
 
-        sequencer.create(start_win_animation).next(win_circle1).next(
-            win_animation).next(win_circle2).next(restart_level)
+        -- death sequence
+        sequencer.create(start_win_animation) -- start
+        .next(win_circle1) -- first circle
+        .next(win_animation) -- pause
+        .next(win_circle2) -- second circle
+        .next(restart_level) -- restart
     end
-    
+
     for p in all(map.entities["Death"]) do
         local box = entities_factory.createDeath(p)
         box.on_touch = on_touch
@@ -491,16 +498,16 @@ end
 
 function _draw()
     draw_background()
-    
+
     for e in all(entities) do
         e:_draw()
     end
-    
+
     particles:_draw()
-    
+
     if transition ~= nil then
         transition:_draw()
     end
-    
+
     player:_draw()
 end

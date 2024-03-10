@@ -11,7 +11,7 @@
 	"iid": "94e3ac30-d7b0-11ee-8429-d3dd7330a4c5",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 49,
+	"nextUid": 50,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "LinearHorizontal",
@@ -840,15 +840,15 @@
 			"maxHeight": null,
 			"keepAspectRatio": false,
 			"tileOpacity": 1,
-			"fillOpacity": 1,
-			"lineOpacity": 1,
+			"fillOpacity": 0.08,
+			"lineOpacity": 0,
 			"hollow": false,
 			"color": "#B042BA",
-			"renderMode": "Rectangle",
+			"renderMode": "Tile",
 			"showName": true,
-			"tilesetId": null,
+			"tilesetId": 2,
 			"tileRenderMode": "FitInside",
-			"tileRect": null,
+			"tileRect": { "tilesetUid": 2, "x": 120, "y": 72, "w": 96, "h": 40 },
 			"uiTileRect": null,
 			"nineSliceBorders": [],
 			"maxCount": 1,
@@ -1443,7 +1443,7 @@
 						},
 						{
 							"__identifier": "GravityBall",
-							"__grid": [6,12],
+							"__grid": [8,10],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -1452,7 +1452,7 @@
 							"width": 8,
 							"height": 8,
 							"defUid": 34,
-							"px": [52,100],
+							"px": [68,84],
 							"fieldInstances": [
 								{ "__identifier": "Gravity", "__type": "LocalEnum.Gravity", "__value": "Up", "__tile": null, "defUid": 36, "realEditorValues": [{
 									"id": "V_String",
@@ -1512,23 +1512,6 @@
 							"fieldInstances": [{ "__identifier": "Gravity", "__type": "LocalEnum.Gravity", "__value": "Down", "__tile": null, "defUid": 38, "realEditorValues": [{
 								"id": "V_String",
 								"params": ["Down"]
-							}] }]
-						},
-						{
-							"__identifier": "Platform",
-							"__grid": [8,1],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#D77643",
-							"iid": "835227f0-d7b0-11ee-8457-b32ff17b28ba",
-							"width": 16,
-							"height": 40,
-							"defUid": 16,
-							"px": [64,8],
-							"fieldInstances": [{ "__identifier": "Gravity", "__type": "LocalEnum.Gravity", "__value": "Up", "__tile": null, "defUid": 38, "realEditorValues": [{
-								"id": "V_String",
-								"params": ["Up"]
 							}] }]
 						},
 						{
@@ -1594,22 +1577,8 @@
 							"fieldInstances": []
 						},
 						{
-							"__identifier": "Title",
-							"__grid": [2,3],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#B042BA",
-							"iid": "9622cbb0-d7b0-11ee-9d1d-03614203daad",
-							"width": 97,
-							"height": 41,
-							"defUid": 41,
-							"px": [16,24],
-							"fieldInstances": []
-						},
-						{
 							"__identifier": "Death",
-							"__grid": [9,12],
+							"__grid": [2,12],
 							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
@@ -1618,7 +1587,7 @@
 							"width": 8,
 							"height": 8,
 							"defUid": 42,
-							"px": [72,96],
+							"px": [16,96],
 							"fieldInstances": []
 						},
 						{
@@ -1648,26 +1617,6 @@
 							"defUid": 42,
 							"px": [88,96],
 							"fieldInstances": []
-						},
-						{
-							"__identifier": "Escargot",
-							"__grid": [1,12],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": { "tilesetUid": 45, "x": 0, "y": 0, "w": 16, "h": 8 },
-							"__smartColor": "#733E39",
-							"iid": "62a5df70-d7b0-11ee-84cb-c39d3a8d5f2b",
-							"width": 16,
-							"height": 8,
-							"defUid": 43,
-							"px": [8,96],
-							"fieldInstances": [
-								{ "__identifier": "Gravity", "__type": "LocalEnum.Gravity", "__value": "Down", "__tile": null, "defUid": 47, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["Down"]
-								}] },
-								{ "__identifier": "Direction", "__type": "LocalEnum.Gravity", "__value": "Right", "__tile": null, "defUid": 48, "realEditorValues": [] }
-							]
 						},
 						{
 							"__identifier": "Bouncer",

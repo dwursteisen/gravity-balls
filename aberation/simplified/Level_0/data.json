@@ -124,8 +124,8 @@
 				"id": "GravityBall",
 				"iid": "1f81eb70-d7b0-11ee-8715-9d515d18307d",
 				"layer": "Entities",
-				"x": 52,
-				"y": 100,
+				"x": 68,
+				"y": 84,
 				"width": 8,
 				"height": 8,
 				"color": 6539085,
@@ -167,19 +167,6 @@
 				"color": 14120515,
 				"customFields": {
 					"Gravity": "Down"
-				}
-			},
-			{
-				"id": "Platform",
-				"iid": "835227f0-d7b0-11ee-8457-b32ff17b28ba",
-				"layer": "Entities",
-				"x": 64,
-				"y": 8,
-				"width": 16,
-				"height": 40,
-				"color": 14120515,
-				"customFields": {
-					"Gravity": "Up"
 				}
 			}
 		],
@@ -257,25 +244,12 @@
 				"customFields" : {}
 			}
 		],
-		"Title": [
-			{
-				"id": "Title",
-				"iid": "9622cbb0-d7b0-11ee-9d1d-03614203daad",
-				"layer": "Entities",
-				"x": 16,
-				"y": 24,
-				"width": 97,
-				"height": 41,
-				"color": 11551418,
-				"customFields" : {}
-			}
-		],
 		"Death": [
 			{
 				"id": "Death",
 				"iid": "62fd0f50-d7b0-11ee-9d1d-038c85ad0edf",
 				"layer": "Entities",
-				"x": 72,
+				"x": 16,
 				"y": 96,
 				"width": 8,
 				"height": 8,
@@ -303,22 +277,6 @@
 				"height": 8,
 				"color": 16711748,
 				"customFields" : {}
-			}
-		],
-		"Escargot": [
-			{
-				"id": "Escargot",
-				"iid": "62a5df70-d7b0-11ee-84cb-c39d3a8d5f2b",
-				"layer": "Entities",
-				"x": 8,
-				"y": 96,
-				"width": 16,
-				"height": 8,
-				"color": 7552569,
-				"customFields": {
-					"Gravity": "Down",
-					"Direction": "Right"
-				}
 			}
 		]
 	}
