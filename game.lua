@@ -371,8 +371,6 @@ function load_level(new_level, previous_level)
 
     progress.progress = new_level
     
-    player.start_x = player.x
-    player.start_y = player.y
 
     for p in all(map.entities["Portal"]) do
         local portal = entities_factory.createPortal(p, load_level)
@@ -475,6 +473,9 @@ function _init()
     for p in all(map.entities["Spawn"]) do
         player = player_factory.createPlayer(p)
     end
+
+    player.start_x = player.x
+    player.start_y = player.y
 
     camera = new(Camera)
     load_level()

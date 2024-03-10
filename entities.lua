@@ -329,12 +329,15 @@ Portal._init = function(self)
     self.label = self.customFields.label
     self.target_level = self.customFields.Exit_ref.levelIid
 
+    local current = map.level()
+    map.level(self.target_level)
     for e in all(map.entities["PortalExit"]) do
         if e.iid == self.customFields.Exit_ref.entityIid then
             self.target_x = e.x
             self.target_y = e.y
         end
     end
+    map.level(current)
 
     function square_size(r)
         local diagonal = 2 * r -- Diameter of the circle
@@ -362,6 +365,8 @@ Portal._update = function(self, player)
         map.level(self.target_level)
         player.x = self.target_x
         player.y = self.target_y
+        player.start_x = player.x
+        player.start_y = player.y
         player.transition = true
         sfx.play(2)
     
