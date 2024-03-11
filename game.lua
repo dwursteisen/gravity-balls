@@ -455,6 +455,11 @@ function load_level(new_level, previous_level)
         box.bouncer = find_bouncer(p, map.entities["Bouncer"])
         table.insert(entities, box)
     end
+
+    for p in all(map.entities["Title"]) do
+        local title = new(Title, p)
+        table.insert(entities, title)
+    end
 end
 
 function _init()
@@ -470,11 +475,6 @@ function _init()
 
     camera = new(Camera)
     load_level()
-
-    for p in all(map.entities["Title"]) do
-        local title = new(Title, p)
-        table.insert(entities, title)
-    end
 end
 
 function _update()

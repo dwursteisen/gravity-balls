@@ -47,19 +47,6 @@
 				}
 			}
 		],
-		"Title": [
-			{
-				"id": "Title",
-				"iid": "4cf10170-d7b0-11ee-84cb-77b7a87ecbbb",
-				"layer": "Entities",
-				"x": 16,
-				"y": 16,
-				"width": 97,
-				"height": 41,
-				"color": 11551418,
-				"customFields" : {}
-			}
-		],
 		"Collision": [
 			{
 				"id": "Collision",
@@ -136,6 +123,19 @@
 				"width": 8,
 				"height": 24,
 				"color": 15389866,
+				"customFields" : {}
+			}
+		],
+		"Title": [
+			{
+				"id": "Title",
+				"iid": "86d191e0-d7b0-11ee-b4a0-9f7694fe532d",
+				"layer": "Entities",
+				"x": 16,
+				"y": 16,
+				"width": 97,
+				"height": 41,
+				"color": 11551418,
 				"customFields" : {}
 			}
 		]

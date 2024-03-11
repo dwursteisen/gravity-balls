@@ -56,9 +56,8 @@ Player._update = function(self, collisions, platforms)
     if self.stick_to ~= nil then
         self.x = self.x - self.stick_to.dt_x
         self.y = self.y - self.stick_to.dt_y
-        self.stick_to = nil
     end
-
+    --
     if not self.transition then
         -- move horizontally
         if not self.killed and ctrl.pressing(keys.left) then -- move left
@@ -72,8 +71,8 @@ Player._update = function(self, collisions, platforms)
 
     -- Apply gravity
     -- TODO: apply x velocity with x_gravity
-    self.y_velocity = math.clamp(-5, self.y_velocity + self.gravity_y, 5)
-    self.y = self.y + self.y_velocity
+    self.y_velocity = math.clamp(-6, self.y_velocity + self.gravity_y, 6)
+    self.y = self.y + self.y_velocity * 0.5
 
     if self.stop_jumping > 4 then
         self.stop_jumping = -2
@@ -94,7 +93,7 @@ Player._update = function(self, collisions, platforms)
 
         self.jumping = true
         self.stop_jumping = -1
-        self.y_velocity = -5 * self.gravity_y_sign
+        self.y_velocity = -10 * self.gravity_y_sign
         self.y = self.y - 1 * self.gravity_y_sign
         if self.jumping then
             sfx.play(0)
@@ -128,6 +127,8 @@ Player._update = function(self, collisions, platforms)
             end
         end
     end
+
+    self.stick_to = nil
 end
 
 local invert_h = {

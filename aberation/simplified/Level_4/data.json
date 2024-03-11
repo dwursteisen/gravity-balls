@@ -3,8 +3,8 @@
 	"uniqueIdentifer": "63ff9710-d7b0-11ee-8429-27822fca8be2",
 	"x": -1,
 	"y": -1,
-	"width": 256,
-	"height": 256,
+	"width": 344,
+	"height": 152,
 	"bgColor": "#696A79",
 	"neighbourLevels": [],
 	"customFields" : {},
@@ -19,7 +19,7 @@
 				"iid": "c0f13990-d7b0-11ee-84cb-1397d592b303",
 				"layer": "Entities",
 				"x": 24,
-				"y": 216,
+				"y": 136,
 				"width": 8,
 				"height": 8,
 				"color": 14984818,
@@ -31,27 +31,493 @@
 				"id": "Platform",
 				"iid": "c77e7890-d7b0-11ee-84cb-a9599d07228d",
 				"layer": "Entities",
-				"x": 56,
-				"y": 176,
-				"width": 16,
-				"height": 64,
-				"color": 14120515,
-				"customFields": {
-					"Gravity": "Down"
-				}
-			},
-			{
-				"id": "Platform",
-				"iid": "ccb77230-d7b0-11ee-84cb-61984b4adf9a",
-				"layer": "Entities",
-				"x": 104,
-				"y": 176,
+				"x": 72,
+				"y": 80,
 				"width": 16,
 				"height": 64,
 				"color": 14120515,
 				"customFields": {
 					"Gravity": "Up"
 				}
+			},
+			{
+				"id": "Platform",
+				"iid": "ccb77230-d7b0-11ee-84cb-61984b4adf9a",
+				"layer": "Entities",
+				"x": 160,
+				"y": 80,
+				"width": 16,
+				"height": 64,
+				"color": 14120515,
+				"customFields": {
+					"Gravity": "Up"
+				}
+			}
+		],
+		"Collision": [
+			{
+				"id": "Collision",
+				"iid": "9b0ae080-d7b0-11ee-b4a0-afb189b962d3",
+				"layer": "Entities",
+				"x": 96,
+				"y": 136,
+				"width": 56,
+				"height": 8,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "9cf04250-d7b0-11ee-b4a0-99d8dc4e1cf5",
+				"layer": "Entities",
+				"x": 96,
+				"y": 88,
+				"width": 56,
+				"height": 8,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "d9aecbd0-d7b0-11ee-b4a0-75b9280395f5",
+				"layer": "Entities",
+				"x": 8,
+				"y": 40,
+				"width": 232,
+				"height": 8,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "e0619430-d7b0-11ee-b4a0-0152155b33f0",
+				"layer": "Entities",
+				"x": 0,
+				"y": 144,
+				"width": 64,
+				"height": 8,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "e39484a0-d7b0-11ee-b4a0-75d2295a421d",
+				"layer": "Entities",
+				"x": 0,
+				"y": 40,
+				"width": 8,
+				"height": 104,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "f13b6420-d7b0-11ee-b4a0-e120718808b8",
+				"layer": "Entities",
+				"x": 240,
+				"y": 8,
+				"width": 88,
+				"height": 8,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "f2e2f9a0-d7b0-11ee-b4a0-6f8d0a242583",
+				"layer": "Entities",
+				"x": 232,
+				"y": 8,
+				"width": 8,
+				"height": 32,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "f51039e0-d7b0-11ee-b4a0-e72e10120961",
+				"layer": "Entities",
+				"x": 328,
+				"y": 8,
+				"width": 8,
+				"height": 144,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "f7192940-d7b0-11ee-b4a0-1f3666aab2cf",
+				"layer": "Entities",
+				"x": 240,
+				"y": 144,
+				"width": 88,
+				"height": 8,
+				"color": 15389866,
+				"customFields" : {}
+			}
+		],
+		"GravityBall": [
+			{
+				"id": "GravityBall",
+				"iid": "a6492470-d7b0-11ee-b4a0-d7e58e8fb9c0",
+				"layer": "Entities",
+				"x": 188,
+				"y": 108,
+				"width": 8,
+				"height": 8,
+				"color": 6539085,
+				"customFields": {
+					"Gravity": "Up",
+					"Direction": null
+				}
+			},
+			{
+				"id": "GravityBall",
+				"iid": "0ea1c9f0-d7b0-11ee-b4a0-9da270a66236",
+				"layer": "Entities",
+				"x": 284,
+				"y": 36,
+				"width": 8,
+				"height": 8,
+				"color": 6539085,
+				"customFields": {
+					"Gravity": "Down",
+					"Direction": null
+				}
+			}
+		],
+		"Death": [
+			{
+				"id": "Death",
+				"iid": "affb7130-d7b0-11ee-b4a0-a9134863a965",
+				"layer": "Entities",
+				"x": 208,
+				"y": 144,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
+				"customFields" : {}
+			},
+			{
+				"id": "Death",
+				"iid": "b05948a0-d7b0-11ee-b4a0-2f8fea604a3f",
+				"layer": "Entities",
+				"x": 200,
+				"y": 144,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
+				"customFields" : {}
+			},
+			{
+				"id": "Death",
+				"iid": "b0c1ce70-d7b0-11ee-b4a0-99957b9c4369",
+				"layer": "Entities",
+				"x": 192,
+				"y": 144,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
+				"customFields" : {}
+			},
+			{
+				"id": "Death",
+				"iid": "b11ac3e0-d7b0-11ee-b4a0-2fbd3092b651",
+				"layer": "Entities",
+				"x": 184,
+				"y": 144,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
+				"customFields" : {}
+			},
+			{
+				"id": "Death",
+				"iid": "b1b0e960-d7b0-11ee-b4a0-49d3f00e5ec7",
+				"layer": "Entities",
+				"x": 176,
+				"y": 144,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
+				"customFields" : {}
+			},
+			{
+				"id": "Death",
+				"iid": "b24c3f00-d7b0-11ee-b4a0-0921930f0167",
+				"layer": "Entities",
+				"x": 168,
+				"y": 144,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
+				"customFields" : {}
+			},
+			{
+				"id": "Death",
+				"iid": "b2e6f860-d7b0-11ee-b4a0-a7398d2dedd5",
+				"layer": "Entities",
+				"x": 160,
+				"y": 144,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
+				"customFields" : {}
+			},
+			{
+				"id": "Death",
+				"iid": "b3c46010-d7b0-11ee-b4a0-4949364ffdda",
+				"layer": "Entities",
+				"x": 152,
+				"y": 144,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
+				"customFields" : {}
+			},
+			{
+				"id": "Death",
+				"iid": "b4182560-d7b0-11ee-b4a0-c74f08aa446f",
+				"layer": "Entities",
+				"x": 144,
+				"y": 144,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
+				"customFields" : {}
+			},
+			{
+				"id": "Death",
+				"iid": "bcf98d90-d7b0-11ee-b4a0-a13f1a24b758",
+				"layer": "Entities",
+				"x": 216,
+				"y": 144,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
+				"customFields" : {}
+			},
+			{
+				"id": "Death",
+				"iid": "bd674380-d7b0-11ee-b4a0-531a50a9994f",
+				"layer": "Entities",
+				"x": 224,
+				"y": 144,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
+				"customFields" : {}
+			},
+			{
+				"id": "Death",
+				"iid": "bddc7380-d7b0-11ee-b4a0-57293717c4a3",
+				"layer": "Entities",
+				"x": 232,
+				"y": 144,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
+				"customFields" : {}
+			},
+			{
+				"id": "Death",
+				"iid": "b3fd4300-d7b0-11ee-b4a0-a1b633d797f1",
+				"layer": "Entities",
+				"x": 96,
+				"y": 144,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
+				"customFields" : {}
+			},
+			{
+				"id": "Death",
+				"iid": "b4a73ea0-d7b0-11ee-b4a0-4da04aac5ddc",
+				"layer": "Entities",
+				"x": 88,
+				"y": 144,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
+				"customFields" : {}
+			},
+			{
+				"id": "Death",
+				"iid": "b5171770-d7b0-11ee-b4a0-49278b1a33e2",
+				"layer": "Entities",
+				"x": 80,
+				"y": 144,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
+				"customFields" : {}
+			},
+			{
+				"id": "Death",
+				"iid": "b572f310-d7b0-11ee-b4a0-a9182e5e1f5e",
+				"layer": "Entities",
+				"x": 72,
+				"y": 144,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
+				"customFields" : {}
+			},
+			{
+				"id": "Death",
+				"iid": "bc03b480-d7b0-11ee-b4a0-a5fb665a4c58",
+				"layer": "Entities",
+				"x": 64,
+				"y": 144,
+				"width": 8,
+				"height": 8,
+				"color": 16711748,
+				"customFields" : {}
+			}
+		],
+		"Escargot": [
+			{
+				"id": "Escargot",
+				"iid": "c49d6cb0-d7b0-11ee-b4a0-e511474fcf26",
+				"layer": "Entities",
+				"x": 120,
+				"y": 128,
+				"width": 16,
+				"height": 8,
+				"color": 7552569,
+				"customFields": {
+					"Gravity": "Down",
+					"Direction": "Left"
+				}
+			},
+			{
+				"id": "Escargot",
+				"iid": "c5a58de0-d7b0-11ee-b4a0-95e1185abc9c",
+				"layer": "Entities",
+				"x": 104,
+				"y": 80,
+				"width": 16,
+				"height": 8,
+				"color": 7552569,
+				"customFields": {
+					"Gravity": "Down",
+					"Direction": "Right"
+				}
+			},
+			{
+				"id": "Escargot",
+				"iid": "01c95e00-d7b0-11ee-b4a0-3d5c9356d4b3",
+				"layer": "Entities",
+				"x": 280,
+				"y": 16,
+				"width": 16,
+				"height": 8,
+				"color": 7552569,
+				"customFields": {
+					"Gravity": "Up",
+					"Direction": "Right"
+				}
+			}
+		],
+		"Bouncer": [
+			{
+				"id": "Bouncer",
+				"iid": "c741d8c0-d7b0-11ee-b4a0-8be99768f0f9",
+				"layer": "Entities",
+				"x": 88,
+				"y": 80,
+				"width": 8,
+				"height": 8,
+				"color": 16705377,
+				"customFields" : {}
+			},
+			{
+				"id": "Bouncer",
+				"iid": "c80ace10-d7b0-11ee-b4a0-45b81f1c08f6",
+				"layer": "Entities",
+				"x": 152,
+				"y": 80,
+				"width": 8,
+				"height": 8,
+				"color": 16705377,
+				"customFields" : {}
+			},
+			{
+				"id": "Bouncer",
+				"iid": "c8a31670-d7b0-11ee-b4a0-7fb5df53dd16",
+				"layer": "Entities",
+				"x": 152,
+				"y": 128,
+				"width": 8,
+				"height": 8,
+				"color": 16705377,
+				"customFields" : {}
+			},
+			{
+				"id": "Bouncer",
+				"iid": "c952b760-d7b0-11ee-b4a0-efdc43577f5a",
+				"layer": "Entities",
+				"x": 88,
+				"y": 128,
+				"width": 8,
+				"height": 8,
+				"color": 16705377,
+				"customFields" : {}
+			},
+			{
+				"id": "Bouncer",
+				"iid": "fc7bf200-d7b0-11ee-b4a0-6fe00a4408c8",
+				"layer": "Entities",
+				"x": 232,
+				"y": 16,
+				"width": 8,
+				"height": 8,
+				"color": 16705377,
+				"customFields" : {}
+			},
+			{
+				"id": "Bouncer",
+				"iid": "fddd08a0-d7b0-11ee-b4a0-3595002d64c1",
+				"layer": "Entities",
+				"x": 328,
+				"y": 16,
+				"width": 8,
+				"height": 8,
+				"color": 16705377,
+				"customFields" : {}
+			}
+		],
+		"Portal": [
+			{
+				"id": "Portal",
+				"iid": "0b9fad80-d7b0-11ee-b4a0-534a00500da7",
+				"layer": "Entities",
+				"x": 296,
+				"y": 128,
+				"width": 16,
+				"height": 16,
+				"color": 6539085,
+				"customFields": {
+					"Exit_ref": {
+						"entityIid": "cef314e0-d7b0-11ee-84cb-035f893a663b",
+						"layerIid": "6faa3a91-d7b0-11ee-84cb-953c6f36395d",
+						"levelIid": "6faa1380-d7b0-11ee-84cb-d7750683021c",
+						"worldIid": "94e3ac31-d7b0-11ee-8429-f395ff985ff4"
+					},
+					"label": "exit"
+				}
+			}
+		],
+		"Spawn": [
+			{
+				"id": "Spawn",
+				"iid": "aeabca40-d7b0-11ee-b4a0-a5a642da3dea",
+				"layer": "Entities",
+				"x": 24,
+				"y": 120,
+				"width": 8,
+				"height": 8,
+				"color": 39387,
+				"customFields" : {}
 			}
 		]
 	}
