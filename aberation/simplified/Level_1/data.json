@@ -146,7 +146,9 @@
 				"width": 8,
 				"height": 8,
 				"color": 14984818,
-				"customFields" : {}
+				"customFields": {
+					"Gravity": "Down"
+				}
 			}
 		],
 		"Death": [
@@ -265,6 +267,19 @@
 					},
 					"label": "exit"
 				}
+			}
+		],
+		"Spawn": [
+			{
+				"id": "Spawn",
+				"iid": "2a2e88c0-d7b0-11ee-b8b5-d16c4b74182f",
+				"layer": "Entities",
+				"x": 16,
+				"y": 40,
+				"width": 8,
+				"height": 8,
+				"color": 39387,
+				"customFields" : {}
 			}
 		]
 	}

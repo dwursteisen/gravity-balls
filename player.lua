@@ -181,6 +181,18 @@ Player.restart = function(self)
     self.x_dir = 1
     self.y_dir = 0
     self.stick_to = nil
+    self:update_gravity(self.gravity_start)
+end
+
+Player.update_gravity = function(self, gravity)
+    self.gravity_str = gravity
+    if gravity == "Up" then
+        self.gravity_sign = -1
+        self.gravity_y = -0.5
+    else
+        self.gravity_sign = 1
+        self.gravity_y = 0.5
+    end
 end
 
 local factory = {}

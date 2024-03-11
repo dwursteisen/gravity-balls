@@ -179,7 +179,7 @@ local Progress = {
     width = 80,
     height = 10,
     progress = 0,
-    max = 5
+    max = 9
 }
 
 local progress = nil
@@ -463,6 +463,12 @@ function load_level(new_level, previous_level)
         local title = new(Title, p)
         table.insert(entities, title)
     end
+
+    for p in all(map.entities["PortalExit"]) do
+        player.gravity_start = p.customFields.Gravity  
+        debug.console(player.gravity_start)   
+        player:restart()
+    end
 end
 
 function _init()
@@ -475,7 +481,7 @@ function _init()
 
     player.start_x = player.x
     player.start_y = player.y
-
+    
     camera = new(Camera)
     load_level()
 end

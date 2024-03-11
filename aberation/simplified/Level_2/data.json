@@ -190,7 +190,9 @@
 				"width": 8,
 				"height": 8,
 				"color": 14984818,
-				"customFields" : {}
+				"customFields": {
+					"Gravity": "Down"
+				}
 			}
 		],
 		"Door": [
@@ -298,6 +300,19 @@
 				"customFields": {
 					"Gravity": "Down"
 				}
+			}
+		],
+		"Spawn": [
+			{
+				"id": "Spawn",
+				"iid": "2745e7c0-d7b0-11ee-b8b5-a1701f7ce025",
+				"layer": "Entities",
+				"x": 48,
+				"y": 40,
+				"width": 8,
+				"height": 8,
+				"color": 39387,
+				"customFields" : {}
 			}
 		]
 	}

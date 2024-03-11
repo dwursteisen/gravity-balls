@@ -23,7 +23,9 @@
 				"width": 8,
 				"height": 8,
 				"color": 14984818,
-				"customFields" : {}
+				"customFields": {
+					"Gravity": "Down"
+				}
 			}
 		],
 		"Escargot": [
@@ -531,6 +533,19 @@
 				"width": 112,
 				"height": 8,
 				"color": 15389866,
+				"customFields" : {}
+			}
+		],
+		"Spawn": [
+			{
+				"id": "Spawn",
+				"iid": "2e889410-d7b0-11ee-b8b5-adea1d930808",
+				"layer": "Entities",
+				"x": 216,
+				"y": 40,
+				"width": 8,
+				"height": 8,
+				"color": 39387,
 				"customFields" : {}
 			}
 		]
