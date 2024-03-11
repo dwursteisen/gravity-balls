@@ -1,0 +1,140 @@
+{
+	"identifier": "Level_10",
+	"uniqueIdentifer": "6faa1380-d7b0-11ee-84cb-d7750683021c",
+	"x": -1,
+	"y": -1,
+	"width": 128,
+	"height": 128,
+	"bgColor": "#696A79",
+	"neighbourLevels": [],
+	"customFields" : {},
+	"layers": [
+		"Tiles.png",
+		"IntGrid.png"
+	],
+	"entities": {
+		"PortalExit": [
+			{
+				"id": "PortalExit",
+				"iid": "cef314e0-d7b0-11ee-84cb-035f893a663b",
+				"layer": "Entities",
+				"x": 64,
+				"y": 112,
+				"width": 8,
+				"height": 8,
+				"color": 14984818,
+				"customFields" : {}
+			}
+		],
+		"Bouncer": [
+			{
+				"id": "Bouncer",
+				"iid": "d17293d0-d7b0-11ee-84cb-b3197c603f9a",
+				"layer": "Entities",
+				"x": 8,
+				"y": 8,
+				"width": 8,
+				"height": 8,
+				"color": 16705377,
+				"customFields" : {}
+			},
+			{
+				"id": "Bouncer",
+				"iid": "d217fb90-d7b0-11ee-84cb-b5aa11b0f037",
+				"layer": "Entities",
+				"x": 112,
+				"y": 8,
+				"width": 8,
+				"height": 8,
+				"color": 16705377,
+				"customFields" : {}
+			}
+		],
+		"Escargot": [
+			{
+				"id": "Escargot",
+				"iid": "d42a12b0-d7b0-11ee-84cb-d32b12380784",
+				"layer": "Entities",
+				"x": 56,
+				"y": 8,
+				"width": 16,
+				"height": 8,
+				"color": 7552569,
+				"customFields": {
+					"Gravity": "Up",
+					"Direction": "Right"
+				}
+			}
+		],
+		"Title": [
+			{
+				"id": "Title",
+				"iid": "4cf10170-d7b0-11ee-84cb-77b7a87ecbbb",
+				"layer": "Entities",
+				"x": 16,
+				"y": 16,
+				"width": 97,
+				"height": 41,
+				"color": 11551418,
+				"customFields" : {}
+			}
+		],
+		"Collision": [
+			{
+				"id": "Collision",
+				"iid": "fdbfdc50-d7b0-11ee-b4a0-01cf4c30419c",
+				"layer": "Entities",
+				"x": 0,
+				"y": 120,
+				"width": 128,
+				"height": 8,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "ffad7b80-d7b0-11ee-b4a0-cb22493ecaee",
+				"layer": "Entities",
+				"x": 0,
+				"y": 112,
+				"width": 16,
+				"height": 8,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "01eeb8f0-d7b0-11ee-b4a0-bf8f21095258",
+				"layer": "Entities",
+				"x": 112,
+				"y": 112,
+				"width": 16,
+				"height": 8,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "03a14af0-d7b0-11ee-b4a0-31f1f89ff323",
+				"layer": "Entities",
+				"x": 120,
+				"y": 0,
+				"width": 8,
+				"height": 112,
+				"color": 15389866,
+				"customFields" : {}
+			},
+			{
+				"id": "Collision",
+				"iid": "05ea0270-d7b0-11ee-b4a0-b94086cfd3d1",
+				"layer": "Entities",
+				"x": 0,
+				"y": 0,
+				"width": 8,
+				"height": 112,
+				"color": 15389866,
+				"customFields" : {}
+			}
+		]
+	}
+}
