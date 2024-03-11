@@ -156,7 +156,9 @@
 				"width": 8,
 				"height": 8,
 				"color": 16711748,
-				"customFields" : {}
+				"customFields": {
+					"Gravity": "Down"
+				}
 			},
 			{
 				"id": "Death",
@@ -167,7 +169,9 @@
 				"width": 8,
 				"height": 8,
 				"color": 16711748,
-				"customFields" : {}
+				"customFields": {
+					"Gravity": "Down"
+				}
 			},
 			{
 				"id": "Death",
@@ -178,7 +182,9 @@
 				"width": 8,
 				"height": 8,
 				"color": 16711748,
-				"customFields" : {}
+				"customFields": {
+					"Gravity": "Down"
+				}
 			},
 			{
 				"id": "Death",
@@ -189,7 +195,9 @@
 				"width": 8,
 				"height": 8,
 				"color": 16711748,
-				"customFields" : {}
+				"customFields": {
+					"Gravity": "Down"
+				}
 			},
 			{
 				"id": "Death",
@@ -200,7 +208,9 @@
 				"width": 8,
 				"height": 8,
 				"color": 16711748,
-				"customFields" : {}
+				"customFields": {
+					"Gravity": "Down"
+				}
 			},
 			{
 				"id": "Death",
@@ -211,7 +221,9 @@
 				"width": 8,
 				"height": 8,
 				"color": 16711748,
-				"customFields" : {}
+				"customFields": {
+					"Gravity": "Down"
+				}
 			},
 			{
 				"id": "Death",
@@ -222,7 +234,9 @@
 				"width": 8,
 				"height": 8,
 				"color": 16711748,
-				"customFields" : {}
+				"customFields": {
+					"Gravity": "Down"
+				}
 			},
 			{
 				"id": "Death",
@@ -233,7 +247,9 @@
 				"width": 8,
 				"height": 8,
 				"color": 16711748,
-				"customFields" : {}
+				"customFields": {
+					"Gravity": "Down"
+				}
 			},
 			{
 				"id": "Death",
@@ -244,7 +260,9 @@
 				"width": 8,
 				"height": 8,
 				"color": 16711748,
-				"customFields" : {}
+				"customFields": {
+					"Gravity": "Down"
+				}
 			}
 		],
 		"Portal": [

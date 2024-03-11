@@ -71,8 +71,10 @@ Player._update = function(self, collisions, platforms)
 
     -- Apply gravity
     -- TODO: apply x velocity with x_gravity
-    self.y_velocity = math.clamp(-6, self.y_velocity + self.gravity_y, 6)
-    self.y = self.y + self.y_velocity * 0.5
+    if not self.killed then 
+        self.y_velocity = math.clamp(-6, self.y_velocity + self.gravity_y, 6)
+        self.y = self.y + self.y_velocity * 0.5
+    end
 
     if self.stop_jumping > 4 then
         self.stop_jumping = -2

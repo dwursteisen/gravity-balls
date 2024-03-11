@@ -407,6 +407,7 @@ local Death = {
 }
 
 Death._init = function(self)
+    self.gravity = self.customFields.Gravity
 end
 
 Death._update = function(self, player)
@@ -418,7 +419,7 @@ end
 Death._draw = function(self, player)
     local prec = spr.sheet("tiles.png")
 
-    spr.sdraw(self.x, self.y, 0, 152, 8, 8)
+    spr.sdraw(self.x, self.y, 0, 152, 8, 8, false, self.gravity == "Up")
 
     spr.sheet(prec)
 end

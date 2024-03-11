@@ -51,6 +51,9 @@ local rgravity_colors = {
 }
 
 function restart_level()
+    for g in all(gravity_balls) do
+        g.consumed = false
+    end
     player:restart()
     load_level(map.level(), map.level())
     return true
