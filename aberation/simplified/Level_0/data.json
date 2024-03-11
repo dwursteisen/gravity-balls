@@ -138,6 +138,21 @@
 				"color": 11551418,
 				"customFields" : {}
 			}
+		],
+		"PortalExit": [
+			{
+				"id": "PortalExit",
+				"iid": "6669f830-d7b0-11ee-b8b5-077f8d564872",
+				"layer": "Entities",
+				"x": 16,
+				"y": 96,
+				"width": 8,
+				"height": 8,
+				"color": 14984818,
+				"customFields": {
+					"Gravity": "Down"
+				}
+			}
 		]
 	}
 }

@@ -1726,6 +1726,20 @@
 							"defUid": 41,
 							"px": [16,16],
 							"fieldInstances": []
+						},
+						{
+							"__identifier": "PortalExit",
+							"__grid": [2,12],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#E4A672",
+							"iid": "6669f830-d7b0-11ee-b8b5-077f8d564872",
+							"width": 8,
+							"height": 8,
+							"defUid": 24,
+							"px": [16,96],
+							"fieldInstances": [{ "__identifier": "Gravity", "__type": "LocalEnum.Gravity", "__value": "Down", "__tile": null, "defUid": 60, "realEditorValues": [] }]
 						}
 					]
 				},

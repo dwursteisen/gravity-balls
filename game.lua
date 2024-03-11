@@ -466,7 +466,6 @@ function load_level(new_level, previous_level)
 
     for p in all(map.entities["PortalExit"]) do
         player.gravity_start = p.customFields.Gravity  
-        debug.console(player.gravity_start)   
         player:restart()
     end
 end
