@@ -17,7 +17,8 @@ local Circle = {
     r = 0,
     frame = 0,
     paused = true,
-    cycle = 1
+    cycle = 1,
+    ttl = 1
 }
 
 local background = {
@@ -106,33 +107,25 @@ end
 Circle._update = function(self)
     self.frame = self.frame + 1
 
-    self.x = 128 * 0.5
-    self.y = 128 * 0.5
+    if self.ttl < 0.5 then
+        self.r = juice.circleIn(0, 200, self.ttl / 0.5)
+    else
+        self.r = juice.circleIn(200, 10, (self.ttl - 0.5) / 0.5)
+    end
 
-    self.r = juice.circleOut(math.min(self.frame / 70, 1)) * 200 * 0.5
-    if self.r >= 200 * 0.5 then
+    self.ttl = self.ttl - tiny.dt
+    if self.ttl < 0 then
+        map.level(self.next)
         player.transition = false
         transition = nil
     end
 end
 
 Circle._draw = function(self)
-    map.level(self.prev)
-
-    draw_background()
-
-    shape.circlef(self.x, self.y, self.r + 8, 1)
-
-    shape.circlef(self.x, self.y, self.r, 0) -- draw transparent circle
-    gfx.to_sheet(8)
-
-    map.level(self.next)
-    draw_background()
-
-    spr.sheet(8)
-    spr.sdraw()
-
-    -- shape.circle(self.x, self.y, self.r, 1)
+    for i = 0, 5 do
+        local r = math.max(0, self.r - i * 20)
+        shape.circlef(self.x, self.y, r, 3 + (i % 2))
+    end
 end
 
 local Camera = {
@@ -178,14 +171,13 @@ Title._draw = function(self)
 end
 
 local Progress = {
-    x = (128 - 80) * 0.5, 
+    x = (128 - 80) * 0.5,
     y = 0,
     width = 80,
     height = 10,
     progress = 0,
     max = 5
 }
-
 
 local progress = nil
 
@@ -292,8 +284,8 @@ end
 local win_circle1 = function(t, t_action, frame)
     if frame == 0 then
         local create = function(index, p)
-            p.x = player.x + player.width * 0.5 
-            p.y = player.y + player.height * 0.5    
+            p.x = player.x + player.width * 0.5
+            p.y = player.y + player.height * 0.5
             p.r = 80
             p.ttl = 1.1
             return p
@@ -333,8 +325,8 @@ end
 local win_circle2 = function(t, t_action, frame)
     if frame == 0 then
         local create = function(index, p)
-            p.x = player.x + player.width * 0.5 
-            p.y = player.y + player.height * 0.5    
+            p.x = player.x + player.width * 0.5
+            p.y = player.y + player.height * 0.5
             p.r = 10
             p.ttl = 0.6
             return p
@@ -370,7 +362,6 @@ function load_level(new_level, previous_level)
     collides = {}
 
     progress.progress = new_level
-    
 
     for p in all(map.entities["Portal"]) do
         local portal = entities_factory.createPortal(p, load_level)
@@ -403,6 +394,8 @@ function load_level(new_level, previous_level)
             prev = previous_level,
             next = new_level
         })
+        transition.x = player.x
+        transition.y = player.y
     end
 
     function find_bouncer(ball, bouncers)
@@ -464,8 +457,6 @@ function load_level(new_level, previous_level)
     end
 end
 
-
-
 function _init()
     progress = new(Progress)
 
@@ -498,7 +489,7 @@ function _update()
     elseif not player.killed and (ctrl.pressed(keys.left) or ctrl.pressed(keys.right)) then
         add_dust(player.x, player.y, player.gravity_str)
         sfx.play(1)
-    
+
     end
 
     if transition ~= nil then
@@ -528,7 +519,7 @@ function _draw()
 
     local p = spr.sheet("tiles.png")
     spr.sdraw(camera.x + progress.x, camera.y + progress.y, 40, 128, progress.width, progress.height)
-    
+
     local cursor = math.floor((progress.width - 8) * progress.progress / progress.max)
     spr.sdraw(camera.x + progress.x + cursor + 4, camera.y + progress.y + 3, 56, 144, 6, 9)
     spr.sheet(p)
@@ -541,5 +532,4 @@ function _draw()
 
     player:_draw()
 
-    
 end
